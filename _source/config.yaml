@@ -1,0 +1,10 @@
+title: My Site
+description: This is my Brage site.
+image: dog.png
+rootUrl: https://example.org
+
+data:
+words:
+  - banana
+  - happy
+  - explosion
