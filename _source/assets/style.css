@@ -1,5 +1,141 @@
 body {
-background: #eee;
-color: #222;
-font-family: Helvetica, sans-serif;
+	background: #eee;
+	color: #222;
+	font-family: Helvetica, sans-serif;
+	font-size: 14pt;
+}
+
+footer {
+	font-size: 10pt;
+	text-align: center;
+}
+
+footer a {
+	color: #666;
+	display: flex;
+	text-decoration: none;
+}
+
+footer a:hover {
+	color: #222;
+}
+
+footer a img {
+	height: 1em;
+	margin-right: 0.35em;
+}
+
+footer ul {
+	display: flex;
+	justify-content: center;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+footer ul li {
+	padding: 0 1em;
+}
+
+h1 {
+	font-size: 42pt;
+}
+
+header {
+	text-align: center;
+}
+
+img {
+	max-width: 100%;
+}
+
+main {
+	background: #f1f1f1;
+	box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.1);
+	margin: 1em 0;
+	padding: 2em;
+}
+
+nav {
+	font-size: 16pt;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+nav a {
+	color: #666;
+	display: block;
+	position: relative;
+	text-decoration: none;
+}
+
+nav a:hover {
+	color: #222;
+}
+
+nav ul {
+	display: flex;
+	justify-content: center;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+nav ul li {
+	margin: 0 1em;
+}
+
+#background {
+	background: url("https://media.giphy.com/media/l3vRnoppYtfEbemBO/giphy.gif") center center no-repeat #ddd;
+	background-size: cover;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	opacity: 0.1;
+}
+
+#container {
+	max-width: 920px;
+	min-width: 420px;
+	margin: 0 auto;
+	padding: 3em 1em;
+	position: relative;
+}
+
+.rainbow {
+	display: inline-block;
+	position: relative;
+	background: linear-gradient(
+		to right,
+		red, orange, yellow, green, cyan, blue, violet);
+	/* Standard syntax (must be last) */
+	background-clip: text;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	z-index: 2;
+}
+
+.shadow {
+	position: absolute;
+	left: 0;
+	right: 0;
+	text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+	z-index: 1;
+}
+
+.diggy-diggy-hole {
+	margin: 5em;
+	text-align: center;
+}
+
+/* Gratuitously taken from https://webaim.org/techniques/css/invisiblecontent/ */
+.sr-only {
+	position:absolute;
+	left:-10000px;
+	top:auto;
+	width:1px;
+	height:1px;
+	overflow:hidden;
 }

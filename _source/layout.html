@@ -1,12 +1,61 @@
 <!DOCTYPE html>
 <html>
-<head>
-<link rel="stylesheet" type="text/css" href="/assets/style.css">
-<title>{{ .Site.Title }}</title>
-</head>
+	<head>
+		<meta charset="utf-8">
+        <meta content="ie=edge" http-equiv="x-ua-compatible">
+        <meta name="description" content="{{ .Site.Description }}">
 
-<body>
-<h1>{{ .Site.Title }}</h1>
-{{ .Content }}
-</body>
+        <meta property="og:title" content="{{ .Site.Title }}">
+        <meta property="og:description" content="{{ .Site.Description }}">
+        <meta property="og:url" content="{{ .Site.RootUrl }}">
+        <meta property="og:image" content="{{ .Site.RootUrl }}assets/{{ .Site.Image }}">
+        <meta property="og:image:secure_url" content="{{ .Site.RootUrl }}assets/{{ .Site.Image }}">
+        <meta property="og:image:height" content="800">
+        <meta property="og:image:type" content="image/jpg">
+        <meta property="og:image:width" content="800">
+        <meta property="og:locale" content="en_GB">
+        <meta property="og:site_name" content="{{ .Site.Title }}">
+        <meta property="og:type" content="profile">
+
+        <meta name="twitter:title" content="{{ .Site.Title }}">
+        <meta name="twitter:description" content="{{ .Site.Description }}">
+        <meta name="twitter:image" content="{{ .Site.RootUrl }}assets/{{ .Site.Image }}">
+        <meta name="twitter:card" content="summary">
+
+        <title>{{ .Site.Title }}</title>
+
+        <link rel="stylesheet" type="text/css" href="/assets/style.css">
+        <link rel="shortcut icon" href="/assets/{{ .Site.Image }}">
+	</head>
+	<head>
+
+	<body>
+		<div id="background"></div>
+		<div id="container">
+			<header>
+				<h1><span class="rainbow">{{ .Site.Title }}</span><span class="shadow">{{ .Site.Title }}</span></h1>
+				<nav>
+					<ul>
+						<li><a href="/">CV</a></li>
+						<li><a href="/projects">Projects</a></li>
+						<li><a href="/random">Random</a></li>
+					</ul>
+				</nav>
+			</header>
+			<main>
+				{{ .Content }}
+			</main>
+			<footer>
+				<h2 class="sr-only">Extra links:</h2>
+				<ul>
+					{{ range .Data.links }}
+					<li><a href="{{ .url }}">
+						<img src="/assets/{{ .icon }}" alt="">
+						{{ .title }}
+					</a></li>
+					{{ end }}
+				</ul>
+			</footer>
+		</div>
+	</body>
 </html>

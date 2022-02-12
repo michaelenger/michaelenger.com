@@ -1,10 +1,18 @@
-title: My Site
-description: This is my Brage site.
-image: dog.png
-rootUrl: https://example.org
+title: Michael Enger
+description: I am a professional. This is my website.
+rootUrl: https://michaelenger.com
 
 data:
-words:
-  - banana
-  - happy
-  - explosion
+  links:
+    - title: GitHub
+      icon: github.png
+      url: https://github.com/michaelenger/
+    - title: Instagram
+      icon: instagram.png
+      url: https://www.instagram.com/michaelenger/
+    - title: Twitter
+      icon: twitter.png
+      url: https://twitter.com/michaelenger
+    - title: YouTube
+      icon: youtube.png
+      url: https://www.youtube.com/playlist?list=PLEUcBq9izIjXH3zPKSqy3lpvSanGS6ole
