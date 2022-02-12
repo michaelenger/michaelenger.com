@@ -12,6 +12,7 @@ body {
 
 footer {
 	font-size: 11pt;
+	margin: 2em 0;
 	text-align: center;
 	text-transform: uppercase;
 }
@@ -84,7 +85,7 @@ img {
 }
 
 main {
-	margin: 1em 0;
+	margin: 4em 0;
 }
 
 p {
@@ -108,6 +109,30 @@ p {
 	margin: 0 auto;
 	padding: 3em 1em;
 	position: relative;
+}
+
+#links {
+	display: flex;
+}
+
+#links a {
+	background: white;
+	border-radius: 0.5em;
+	box-shadow: 0 0 3px 0 rgba(0,0,0,0.1);
+	color: inherit;
+	margin: 0 5%;
+	padding: 1.5em;
+	text-align: center;
+	text-decoration: none;
+}
+
+#links a:hover {
+	box-shadow: 0 0 3px 0 rgba(0,0,0,0.3);
+}
+
+#links img {
+	display: block;
+	margin-bottom: 1em;
 }
 
 .diggy-diggy-hole {
