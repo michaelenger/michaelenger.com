@@ -5,15 +5,11 @@ rootUrl: https://michaelenger.com
 
 data:
   links:
-    - title: GitHub
-      icon: github.png
-      url: https://github.com/michaelenger/
     - title: Instagram
-      icon: instagram.png
       url: https://www.instagram.com/michaelenger/
+    - title: LinkedIn
+      url: https://www.linkedin.com/in/michael-enger-802094110
     - title: Twitter
-      icon: twitter.png
       url: https://twitter.com/michaelenger
     - title: YouTube
-      icon: youtube.png
       url: https://www.youtube.com/playlist?list=PLEUcBq9izIjXH3zPKSqy3lpvSanGS6ole

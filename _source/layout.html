@@ -33,30 +33,23 @@
 		<div id="background"></div>
 		<div id="container">
 			<header>
-				<h1><a href="/"><span class="rainbow">{{ .Site.Title }}</span><span class="shadow">{{ .Site.Title }}</span></a></h1>
-				<nav>
-					<ul>
-						<li><a href="/">CV</a></li>
-						<li><a href="/projects">Projects</a></li>
-						<li><a href="/random">Random</a></li>
-						<li><a href="/about">About</a></li>
-					</ul>
-				</nav>
+				<h1><a href="/">
+					<img src="/assets/bisniss.jpg" alt="">
+					<span>{{ .Site.Title }}</span>
+				</a></h1>
 			</header>
 			<main>
 				{{ .Content }}
 			</main>
 			<footer>
-				<h2 class="sr-only">Extra links:</h2>
+				<h2 class="sr-only">Social media:</h2>
 				<ul>
 					{{ range .Data.links }}
-					<li><a href="{{ .url }}">
-						<img src="/assets/{{ .icon }}" alt="">
-						{{ .title }}
-					</a></li>
+					<li><a href="{{ .url }}">{{ .title }}</a></li>
 					{{ end }}
 				</ul>
 			</footer>
 		</div>
+		<script type="text/javascript" src="/assets/random.js"></script>
 	</body>
 </html>

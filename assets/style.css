@@ -1,18 +1,19 @@
 body {
 	background: #eee;
 	color: #222;
-	font-family: Helvetica, sans-serif;
-	font-size: 14pt;
+	font-family: Roboto, Helvetica, sans-serif;
+	font-size: 12pt;
+	font-weight: lighter;
 }
 
 footer {
-	font-size: 10pt;
+	font-size: 11pt;
 	text-align: center;
+	text-transform: uppercase;
 }
 
 footer a {
 	color: #666;
-	display: flex;
 	text-decoration: none;
 }
 
@@ -26,19 +27,48 @@ footer a img {
 }
 
 footer ul {
-	display: flex;
-	justify-content: center;
 	list-style: none;
 	margin: 0;
 	padding: 0;
+	text-align: center;
 }
 
 footer ul li {
-	padding: 0 1em;
+	display: inline;
+}
+
+footer ul li::before {
+	content: "·";
+	margin: 0 1em;
+}
+
+footer ul li:first-child::before {
+	display: none;
 }
 
 h1 {
 	font-size: 42pt;
+	font-weight: inherit;
+}
+
+h1 a {
+	align-items: center;
+	color: inherit;
+	display: inline-flex;
+	justify-content: center;
+	text-decoration: none;
+}
+
+h1 a span {
+	height: 0.85em;
+}
+
+h1 img {
+	border: 2px solid white;
+	border-radius: 50%;
+	box-shadow: 0 0 3px 0 rgba(0,0,0,0.3);
+	height: 1em;
+	margin-right: 0.25em;
 }
 
 header {
@@ -50,39 +80,11 @@ img {
 }
 
 main {
-	background: #f1f1f1;
-	box-shadow: 0px 0px 3px 0px rgba(0,0,0,0.1);
 	margin: 1em 0;
-	padding: 2em;
 }
 
-nav {
-	font-size: 16pt;
-	font-weight: bold;
-	text-transform: uppercase;
-}
-
-nav a {
-	color: #666;
-	display: block;
-	position: relative;
-	text-decoration: none;
-}
-
-nav a:hover {
-	color: #222;
-}
-
-nav ul {
-	display: flex;
-	justify-content: center;
-	list-style: none;
-	margin: 0;
-	padding: 0;
-}
-
-nav ul li {
-	margin: 0 1em;
+p {
+	margin: 0 0 1em;
 }
 
 #background {
@@ -93,7 +95,7 @@ nav ul li {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	opacity: 0.1;
+	opacity: 0.05;
 }
 
 #container {
@@ -102,27 +104,6 @@ nav ul li {
 	margin: 0 auto;
 	padding: 3em 1em;
 	position: relative;
-}
-
-.rainbow {
-	display: inline-block;
-	position: relative;
-	background: linear-gradient(
-		to right,
-		red, orange, yellow, green, cyan, blue, violet);
-	/* Standard syntax (must be last) */
-	background-clip: text;
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-	z-index: 2;
-}
-
-.shadow {
-	position: absolute;
-	left: 0;
-	right: 0;
-	text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-	z-index: 1;
 }
 
 .diggy-diggy-hole {
