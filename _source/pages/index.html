@@ -1,11 +1,47 @@
-<section id="links">
-	<h2 class="sr-only">Links</h2>
-	<a href="/assets/Michael Enger - CV.pdf">
-		<img src="/assets/pdf-file.png" alt="">
-		CV
-	</a>
-	<a href="https://github.com/michaelenger">
-		<img src="/assets/github.png" alt="">
-		GitHub
-	</a>
-</section>
+<div id="cv">
+	<h2 class="sr-only">CV</h2>
+	<div id="download-link">
+		<a href="/assets/Michael Enger - CV.pdf" title="Download PDF">
+			<img src="/assets/pdf-file.png" alt="">
+		</a>
+	</div>
+	<section id="work">
+		<h3>Work</h3>
+		<ul>
+			{{ range .Data.work }}
+			<li>
+				<h4>{{ .title }}, {{ .employer }} &mdash; {{ .date }}</h4>
+				<p>{{ .description }}</p>
+				<em>
+					{{ range $i, $v := .tech }}{{ if ne $i 0 }}, {{ end }}{{ $v }}{{ end }}
+				</em>
+			</li>
+			{{ end }}
+		</ul>
+	</section>
+	<section id="education">
+		<h3>Education</h3>
+		<ul>
+			{{ range .Data.education }}
+			<li>
+				{{ .school }}; {{ .location }} – <span class="degree">{{ .degree }}</span>, {{ .year }}
+			</li>
+			{{ end }}
+		</ul>
+	</section>
+	<section id="projects">
+		<h3>Projects</h3>
+		<ul>
+			{{ range .Data.projects }}
+			<li>
+				<h4>{{ .title }}</h4>
+				<a href="https://{{ .link }}" aria-label="Project link">
+					{{ .link }}
+				</a>
+				<p>{{ .description }}</p>
+				<em>{{ .tech }}</em>
+			</li>
+			{{ end }}
+		</ul>
+	</section>
+</div>

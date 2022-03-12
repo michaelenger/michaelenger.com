@@ -80,6 +80,12 @@ h1 img {
 	margin-right: 0.25em;
 }
 
+h3 {
+	font-size: 24pt;
+	font-weight: inherit;
+	margin-top: 0;
+}
+
 header {
 	text-align: center;
 }
@@ -115,28 +121,80 @@ p {
 	position: relative;
 }
 
-#links {
-	display: flex;
+#cv {
+	background: rgba(255, 255, 255, 0.85);
+	border-radius: 0.25em;
+	box-shadow: 0 0 3px 0 rgba(0,0,0,0.1);
+	line-height: 1.45em;
+	padding: 1.5em;
+	position: relative;
 }
 
-#links a {
-	background: white;
-	border-radius: 0.5em;
-	box-shadow: 0 0 3px 0 rgba(0,0,0,0.1);
+#cv a {
 	color: inherit;
-	margin: 0 5%;
-	padding: 1.5em;
-	text-align: center;
+	font-weight: bold;
 	text-decoration: none;
 }
 
-#links a:hover {
-	box-shadow: 0 0 3px 0 rgba(0,0,0,0.3);
+#cv a:hover {
+	text-decoration: underline;
 }
 
-#links img {
-	display: block;
-	margin-bottom: 1em;
+#cv h3 {
+	line-height: 1.5em;
+	margin-bottom: 0.5em;
+}
+
+#cv h4 {
+	margin: 0;
+}
+
+#cv p {
+	margin: 0.5em 0;
+}
+
+#cv section {
+	margin-bottom: 2em;
+}
+
+#cv section:last-child {
+	margin-bottom: 0;
+}
+
+#cv ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+#cv li {
+	margin-bottom: 1.5em;
+}
+
+#cv li:last-child {
+	margin-bottom: 0;
+}
+
+#cv #download-link {
+	position: absolute;
+	right: 1em;
+	top: 1em;
+	width: 3em;
+}
+
+#education .degree {
+	font-weight: bold;
+}
+
+#projects h4 {
+	float: left;
+	margin-right: 0.4em;
+}
+
+#projects a {
+	color: #666;
+	font-size: 0.8em;
+	font-weight: lighter;
 }
 
 .diggy-diggy-hole {
