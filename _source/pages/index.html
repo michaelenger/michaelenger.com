@@ -14,9 +14,9 @@
 	<h2>Education</h2>
 	<ul>
 		{{ range .Data.education }}
-		<li>
+		<li><p>
 			{{ .school }}; {{ .location }} – <span class="degree">{{ .degree }}</span>, {{ .year }}
-		</li>
+		</p></li>
 		{{ end }}
 	</ul>
 </section>
