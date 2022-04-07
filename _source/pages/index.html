@@ -5,16 +5,14 @@
 			<img src="/assets/pdf-file.png" alt="">
 		</a>
 	</div>
-	<section id="work">
-		<h3>Work</h3>
+	<section id="experience">
+		<h3>Experience</h3>
 		<ul>
-			{{ range .Data.work }}
+			{{ range .Data.experience }}
 			<li>
 				<h4>{{ .title }}, {{ .employer }} &mdash; {{ .date }}</h4>
 				<p>{{ .description }}</p>
-				<em>
-					{{ range $i, $v := .tech }}{{ if ne $i 0 }}, {{ end }}{{ $v }}{{ end }}
-				</em>
+				{{ template "tech-list" .tech }}
 			</li>
 			{{ end }}
 		</ul>
@@ -39,7 +37,7 @@
 					{{ .link }}
 				</a>
 				<p>{{ .description }}</p>
-				<em>{{ .tech }}</em>
+				{{ template "tech-list" .tech }}
 			</li>
 			{{ end }}
 		</ul>
