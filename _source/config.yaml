@@ -4,17 +4,6 @@ image: bisniss.jpg
 rootUrl: https://michaelenger.com
 
 data:
-  links:
-    - title: GitHub
-      url: https://github.com/michaelenger/
-    - title: Instagram
-      url: https://www.instagram.com/michaelenger/
-    - title: LinkedIn
-      url: https://www.linkedin.com/in/michael-enger-802094110
-    - title: Twitter
-      url: https://twitter.com/michaelenger
-    - title: YouTube
-      url: https://www.youtube.com/playlist?list=PLEUcBq9izIjXH3zPKSqy3lpvSanGS6ole
   experience:
     - title: Senior Software Engineer
       employer: The Orchard
@@ -30,7 +19,7 @@ data:
         - AWS
         - Docker
         - Terraform
-    - title: Software Engineer
+    - title: Desktop Engineer
       employer: TIDAL
       date: Dec 2016 – Mar 2019
       description: TIDAL is a music streaming service, known for their curated content and high quality audio playback. My position was to work on the desktop application which was built on Electron and includes a C++ audio playback engine that provides playback via Core Audio on macOS and WASAPI on Windows. The audio engine provides decoding of all the supported audio formats, gapless playback, and exclusive control of USB audio devices.
@@ -91,17 +80,17 @@ data:
       year: 2009
   projects:
     - title: swifter
-      link: github.com/httpswift/swifter
+      link: https://github.com/httpswift/swifter
       description: Tiny HTTP server engine built as a library for Swift projects. I joined the project last year and have been involved in the latest release doing bug fixes and approving merge requests.
       tech:
         - Swift
     - title: brage
-      link: github.com/michaelenger/brage
+      link: https://github.com/michaelenger/brage
       description: Command-line tool for generating static websites based on Markdown and Go text templates, built to help me easier create and manage websites for the various bands and artists I help promote.
       tech:
         - Go
     - title: gifff
-      link: github.com/michaelenger/gifff
+      link: https://github.com/michaelenger/gifff
       description: Tiny command-line tool used for fetching gif images from gfycat.com. It can take any text as a search term and returns a URL to a random gif based on it, or one of the trending gifs from Gfycat’s front page. It also keeps track of what gifs you have already seen so that you avoid seeing the same one twice.
       tech:
         - Rust

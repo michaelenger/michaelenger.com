@@ -30,24 +30,15 @@
 	<head>
 
 	<body>
-		<div id="background"></div>
 		<div id="container">
 			<header>
-				<h1><a href="/">
-					<img src="/assets/bisniss.jpg" alt="">
-					<span>{{ .Site.Title }}</span>
-				</a></h1>
+				<h1><a href="/">{{ .Site.Title }}</a></h1>
 			</header>
 			<main>
 				{{ .Content }}
 			</main>
 			<footer>
-				<h2 class="sr-only">Social media links</h2>
-				<ul>
-					{{ range .Data.links }}
-					<li><a href="{{ .url }}">{{ .title }}</a></li>
-					{{ end }}
-				</ul>
+				♥
 			</footer>
 		</div>
 	</body>

@@ -1,7 +1,17 @@
+a {
+	color: inherit;
+}
+
+a svg {
+	height: 0.8em;
+	margin-left: 0.25em;
+	width: 0.8em;
+}
+
 body {
-	background: #eee;
-	color: #222;
-	font-family: Roboto, Helvetica, sans-serif;
+	background: #0f172a;
+	color: #c3c3c3;
+	font-family: 'PT Mono', Georgia, serif;
 	font-size: 12pt;
 	font-weight: lighter;
 	margin: 0;
@@ -11,79 +21,32 @@ body {
 }
 
 footer {
-	font-size: 11pt;
+	font-size: 8pt;
 	margin: 2em 0;
 	text-align: center;
-	text-transform: uppercase;
-}
-
-footer a {
-	color: #444;
-	text-decoration: none;
-}
-
-footer a:hover {
-	color: #222;
-}
-
-footer a img {
-	height: 1em;
-	margin-right: 0.35em;
-}
-
-footer ul {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	text-align: center;
-}
-
-footer ul li {
-	display: inline;
-}
-
-footer ul li::before {
-	content: "·";
-	margin: 0 1em;
-}
-
-footer ul li:first-child::before {
-	display: none;
 }
 
 h1 {
 	font-size: 42pt;
-	font-weight: inherit;
 }
 
 h1 a {
-	align-items: center;
-	color: #444;
-	display: inline-flex;
-	justify-content: center;
 	text-decoration: none;
 }
 
 h1 a:hover {
-	color: #222;
+	color: #dadada;
 }
 
-h1 a span {
-	height: 0.85em;
-}
-
-h1 img {
-	border: 2px solid white;
-	border-radius: 50%;
-	box-shadow: 0 0 3px 0 rgba(0,0,0,0.3);
-	height: 1em;
-	margin-right: 0.25em;
+h2 {
+	color: #b591dd;
+	font-size: 24pt;
+	line-height: 1.5em;
+	margin-bottom: 0.5em;
 }
 
 h3 {
-	font-size: 24pt;
-	font-weight: inherit;
-	margin-top: 0;
+	margin: 0;
 }
 
 header {
@@ -99,18 +62,30 @@ main {
 }
 
 p {
-	margin: 0 0 1em;
+	line-height: 1.35em;
+	margin: 0.5em 0;
 }
 
-#background {
-	background: url("https://media.giphy.com/media/l3vRnoppYtfEbemBO/giphy.gif") center center no-repeat #ddd;
-	background-size: cover;
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	opacity: 0.05;
+section {
+	margin-bottom: 2em;
+}
+
+section:last-child {
+	margin-bottom: 0;
+}
+
+ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+li {
+	margin-bottom: 1.5em;
+}
+
+li:last-child {
+	margin-bottom: 0;
 }
 
 #container {
@@ -118,96 +93,8 @@ p {
 	min-width: 420px;
 	margin: 0 auto;
 	padding: 3em 1em;
-	position: relative;
-}
-
-#cv {
-	background: rgba(255, 255, 255, 0.85);
-	border-radius: 0.25em;
-	box-shadow: 0 0 3px 0 rgba(0,0,0,0.1);
-	line-height: 1.45em;
-	padding: 1.5em;
-	position: relative;
-}
-
-#cv a {
-	color: inherit;
-	font-weight: bold;
-	text-decoration: none;
-}
-
-#cv a:hover {
-	text-decoration: underline;
-}
-
-#cv h3 {
-	line-height: 1.5em;
-	margin-bottom: 0.5em;
-}
-
-#cv h4 {
-	margin: 0;
-}
-
-#cv p {
-	margin: 0.5em 0;
-}
-
-#cv section {
-	margin-bottom: 2em;
-}
-
-#cv section:last-child {
-	margin-bottom: 0;
-}
-
-#cv ul {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-}
-
-#cv li {
-	margin-bottom: 1.5em;
-}
-
-#cv li:last-child {
-	margin-bottom: 0;
-}
-
-#cv #download-link {
-	position: absolute;
-	right: 1em;
-	top: 1em;
-	width: 3em;
 }
 
 #education .degree {
 	font-weight: bold;
-}
-
-#projects h4 {
-	float: left;
-	margin-right: 0.4em;
-}
-
-#projects a {
-	color: #666;
-	font-size: 0.8em;
-	font-weight: lighter;
-}
-
-.diggy-diggy-hole {
-	margin: 5em;
-	text-align: center;
-}
-
-/* Gratuitously taken from https://webaim.org/techniques/css/invisiblecontent/ */
-.sr-only {
-	position:absolute;
-	left:-10000px;
-	top:auto;
-	width:1px;
-	height:1px;
-	overflow:hidden;
 }
