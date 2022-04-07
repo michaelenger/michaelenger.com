@@ -10,7 +10,7 @@
 		<ul>
 			{{ range .Data.experience }}
 			<li>
-				<h4>{{ .title }}, {{ .employer }} &mdash; {{ .date }}</h4>
+				<h4>{{ .title }}, {{ .employer }} &middot; {{ .date }}</h4>
 				<p>{{ .description }}</p>
 				{{ template "tech-list" .tech }}
 			</li>

@@ -18,7 +18,7 @@ data:
   experience:
     - title: Senior Software Engineer
       employer: The Orchard
-      date: 2019 - Present
+      date: Apr 2019 – Present
       description: The Orchard provides music and video distribution services for music labels and artists. I’ve worked on a series of projects within their distribution portal related to calculating royalties for artists. The projects consists of Python micro-services running in AWS, React-based frontend applications, and using GraphQL to communicate between them. The actual calculations are done on a separate ETL process running in an AWS Lambda that connects to a Snowflake table and generates XLS reports and PDF documents.
       tech:
         - Python
@@ -32,7 +32,7 @@ data:
         - Terraform
     - title: Software Engineer
       employer: TIDAL
-      date: 2016 - 2019
+      date: Dec 2016 – Mar 2019
       description: TIDAL is a music streaming service, known for their curated content and high quality audio playback. My position was to work on the desktop application which was built on Electron and includes a C++ audio playback engine that provides playback via Core Audio on macOS and WASAPI on Windows. The audio engine provides decoding of all the supported audio formats, gapless playback, and exclusive control of USB audio devices.
       tech:
         - C++
@@ -42,7 +42,7 @@ data:
         - Electron
     - title: Web Developer
       employer: Dekode
-      date: 2014 - 2015
+      date: Dec 2014 – Oct 2015
       description: Dekode is a WordPress development agency working with local clients and on WordPress VIP sites together with Automaticc. I mainly worked on new and existing WordPress sites, building and maintaining their custom themes and plugins.
       tech:
         - PHP
@@ -51,7 +51,7 @@ data:
         - WordPress
     - title: Backend Developer
       employer: Fronter AS
-      date: 2014
+      date: Apr 2014 – Nov 2014
       description: Fronter is a company which provides a platform for schools and universities, which includes lesson plans, assignment hand-in, and social features. I was on a small team which was developing a lesson planner in Node.js using ElasticSearch as a data store, all hosted on scalable AWS infrastructure.
       tech:
         - JavaScript
@@ -63,7 +63,7 @@ data:
         - Jenkins
     - title: Web Developer
       employer: Nodes Agency
-      date: 2012 - 2013
+      date: Apr 2012 – Jun 2013
       description: Nodes Agency is a consultancy building promotional projects for mobile and web. My work consisted of mostly backend work on smaller apps for customers, but with some work on video processing pipelines and mobile experiences.
       tech:
         - PHP
@@ -73,7 +73,7 @@ data:
         - FFmpeg
     - title: Web Developer
       employer: 07 Web
-      date: 2010 - 2012
+      date: Aug 2010 - Jan 2012
       description: 07 Web is a web consultancy specialising in online magazines. I worked on pages created using the eZ Publish platform.
       tech:
         - PHP
