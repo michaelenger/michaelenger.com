@@ -3,7 +3,7 @@
 	<ul class="list">
 		{{ range .Data.experience }}
 		<li>
-			<h3>{{ .title }}, {{ .employer }} &middot; {{ .date }}</h3>
+			<h3>{{ .title }}, {{ .employer }}<span class="separator"> &middot; </span><span class="date">{{ .date }}</span></h3>
 			<p>{{ .description }}</p>
 			{{ template "tech-list" .tech }}
 		</li>

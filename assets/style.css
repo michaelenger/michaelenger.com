@@ -127,3 +127,17 @@ ul {
 .tech-list svg {
 	margin-right: 0.5em;
 }
+
+@media only screen and (max-width: 720px) {
+	#experience h3 {
+		line-height: 1.5em;
+	}
+
+	#experience .date {
+		display: block;
+	}
+
+	#experience .separator {
+		display: none;
+	}
+}
