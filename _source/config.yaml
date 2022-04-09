@@ -8,7 +8,7 @@ data:
     - title: Senior Software Engineer
       employer: The Orchard
       date: Apr 2019 – Present
-      description: The Orchard provides music and video distribution services for music labels and artists. I’ve worked on a series of projects within their distribution portal related to calculating royalties for artists. The projects consists of Flask micro-services running in AWS, React-based frontend applications, and using GraphQL to communicate between them. The actual calculations are done on a separate ETL process running in AWS Lambdas that connects to a Snowflake table and generates XLS reports and PDF documents.
+      description: "[The Orchard](https://www.theorchard.com/) provides music and video distribution services for music labels and artists. I’ve worked on a series of projects within their distribution portal related to calculating royalties for artists. The projects consists of Flask micro-services running in AWS, React-based frontend applications, and using GraphQL to communicate between them. The actual calculations are done on a separate ETL process running in AWS Lambdas that connects to a Snowflake table and generates XLS reports and PDF documents."
       tech:
         - Python
         - TypeScript
@@ -16,7 +16,7 @@ data:
     - title: Desktop Engineer
       employer: TIDAL
       date: Dec 2016 – Mar 2019
-      description: TIDAL is a music streaming service, known for their curated content and high quality audio playback. My position was to work on the desktop application which was built on Electron and includes a C++ audio playback engine that provides playback via Core Audio on macOS and WASAPI on Windows. The audio engine provides decoding of all the supported audio formats (FLAC and MP3), gapless playback, and exclusive control of USB audio devices.
+      description: "[TIDAL](https://tidal.com/) is a music streaming service, known for their curated content and high quality audio playback. My position was to work on the desktop application which was built on Electron and includes a C++ audio playback engine that provides playback via Core Audio on macOS and WASAPI on Windows. The audio engine provides decoding of all the supported audio formats (FLAC and MP3), gapless playback, and exclusive control of USB audio devices."
       tech:
         - C++
         - TypeScript
@@ -24,7 +24,7 @@ data:
     - title: Web Developer
       employer: Dekode
       date: Dec 2014 – Oct 2015
-      description: Dekode is a WordPress development agency working with local clients and on WordPress VIP sites together with Automaticc. I mainly worked on new and existing WordPress sites, building and maintaining their custom themes and plugins.
+      description: "[Dekode](https://dekode.no/) is a WordPress development agency working with local clients and on WordPress VIP sites together with Automaticc. I mainly worked on new and existing WordPress sites, building and maintaining their custom themes and plugins."
       tech:
         - PHP
         - JavaScript

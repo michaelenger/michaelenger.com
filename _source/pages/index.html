@@ -4,7 +4,7 @@
 		{{ range .Data.experience }}
 		<li>
 			<h3>{{ .title }}, {{ .employer }}<span class="separator"> &middot; </span><span class="date">{{ .date }}</span></h3>
-			<p>{{ .description }}</p>
+			{{ markdown .description }}
 			{{ template "tech-list" .tech }}
 		</li>
 		{{ end }}
