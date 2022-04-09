@@ -110,6 +110,10 @@ ul {
 	margin-bottom: 0;
 }
 
+.tech-list {
+	color: #7f7f7f;
+}
+
 .tech-list li {
 	display: inline-flex;
 	align-items: center;
