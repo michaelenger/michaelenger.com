@@ -1,6 +1,6 @@
 <section id="experience">
 	<h2>Experience</h2>
-	<ul>
+	<ul class="list">
 		{{ range .Data.experience }}
 		<li>
 			<h3>{{ .title }}, {{ .employer }} &middot; {{ .date }}</h3>
@@ -12,7 +12,7 @@
 </section>
 <section id="education">
 	<h2>Education</h2>
-	<ul>
+	<ul class="list">
 		{{ range .Data.education }}
 		<li><p>
 			{{ .school }}; {{ .location }} – <span class="degree">{{ .degree }}</span>, {{ .year }}
@@ -22,7 +22,7 @@
 </section>
 <section id="projects">
 	<h2>Projects</h2>
-	<ul>
+	<ul class="list">
 		{{ range .Data.projects }}
 		<li>
 			<h3><a href="{{ .link }}">

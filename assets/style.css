@@ -88,14 +88,6 @@ ul {
 	padding: 0;
 }
 
-li {
-	margin-bottom: 1.5em;
-}
-
-li:last-child {
-	margin-bottom: 0;
-}
-
 #container {
 	max-width: 920px;
 	min-width: 420px;
@@ -105,4 +97,28 @@ li:last-child {
 
 #education .degree {
 	font-weight: bold;
+}
+
+.list li {
+	margin-bottom: 1.5em;
+}
+
+.list li:last-child {
+	margin-bottom: 0;
+}
+
+.tech-list li {
+	display: inline-flex;
+	align-items: center;
+	margin-right: 0.5em;
+}
+
+.list li:last-child {
+	margin-right: 0;
+}
+
+.tech-list svg {
+	height: 1em;
+	margin-right: 0.5em;
+	width: 1em;
 }
