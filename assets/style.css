@@ -1,0 +1,152 @@
+::selection {
+	background: #7d46bb;
+}
+
+a {
+	color: inherit;
+}
+
+a svg {
+	position: relative;
+	top: 0.15em;
+}
+
+a svg:first-child {
+	margin-right: 0.3em;
+}
+
+a svg:last-child {
+	margin-left: 0.3em;
+}
+
+body {
+	background: #0f172a;
+	color: #c3c3c3;
+	font-family: 'PT Mono', Georgia, serif;
+	font-size: 12pt;
+	font-weight: lighter;
+	margin: 0;
+	min-height: 100%;
+	min-width: 100%;
+	position: absolute;
+}
+
+footer {
+	margin: 2em 0;
+	text-align: center;
+}
+
+h1 {
+	font-size: 42pt;
+}
+
+h1 a {
+	text-decoration: none;
+}
+
+h1 a:hover {
+	color: #dadada;
+}
+
+h2 {
+	color: #b591dd;
+	font-size: 24pt;
+	line-height: 1.5em;
+	margin-bottom: 0.5em;
+}
+
+h3 {
+	margin: 0;
+}
+
+header {
+	text-align: center;
+}
+
+img {
+	max-width: 100%;
+}
+
+main {
+	margin: 4em 0;
+}
+
+p {
+	line-height: 1.35em;
+	margin: 0.5em 0;
+}
+
+section {
+	margin-bottom: 2em;
+}
+
+section:last-child {
+	margin-bottom: 0;
+}
+
+svg {
+	height: 1em;
+	width: 1em;
+}
+
+ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+#container {
+	max-width: 920px;
+	min-width: 420px;
+	margin: 0 auto;
+	padding: 3em 1em;
+}
+
+#education .degree {
+	font-weight: bold;
+}
+
+#projects svg {
+	height: 0.6em;
+	width: 0.6em;
+}
+
+.list li {
+	margin-bottom: 1.5em;
+}
+
+.list li:last-child {
+	margin-bottom: 0;
+}
+
+.tech-list {
+	color: #7f7f7f;
+}
+
+.tech-list li {
+	display: inline-flex;
+	align-items: center;
+	margin-right: 0.5em;
+}
+
+.list li:last-child {
+	margin-right: 0;
+}
+
+.tech-list svg {
+	margin-right: 0.5em;
+}
+
+@media only screen and (max-width: 720px) {
+	#experience h3 {
+		line-height: 1.5em;
+	}
+
+	#experience .date {
+		display: block;
+	}
+
+	#experience .separator {
+		display: none;
+	}
+}
