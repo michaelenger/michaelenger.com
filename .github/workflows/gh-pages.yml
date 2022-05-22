@@ -26,3 +26,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
           cname: michaelenger.com
+          commit_message: ${{ github.event.head_commit.message }}
