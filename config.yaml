@@ -75,6 +75,6 @@ data:
         - Go
     - title: gifff
       link: https://github.com/michaelenger/gifff
-      description: Tiny command-line tool used for fetching gif images from gfycat.com. It can take any text as a search term and returns a URL to a random gif based on it, or one of the trending gifs from Gfycat’s front page. It also keeps track of what gifs you have already seen so that you avoid seeing the same one twice.
+      description: Tiny command-line tool used for fetching gif images based on a search term.
       tech:
         - Rust
