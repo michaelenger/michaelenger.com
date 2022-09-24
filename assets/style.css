@@ -20,8 +20,6 @@ a svg:last-child {
 }
 
 body {
-	background: linear-gradient(#0f172a, #162342);
-	color: #c3c3c3;
 	font-family: 'PT Mono', Georgia, serif;
 	font-size: 12pt;
 	font-weight: lighter;
@@ -58,6 +56,11 @@ h3 {
 
 header {
 	text-align: center;
+}
+
+html {
+	background: linear-gradient(#0f172a, #162342);
+	color: #c3c3c3;
 }
 
 img {
