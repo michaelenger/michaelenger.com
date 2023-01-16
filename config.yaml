@@ -1,6 +1,6 @@
 title: Michael Enger
 description: I am a professional. This is my website.
-image: bisniss.jpg
+image: happybass.png
 rootUrl: https://michaelenger.com
 
 data:
@@ -70,11 +70,11 @@ data:
         - Rust
     - title: brage
       link: https://github.com/michaelenger/brage
-      description: Command-line tool for generating static websites based on Markdown and Go text templates. Was used to build this website.
+      description: Command-line tool for generating static websites based on Markdown and Go text templates. Was used to build this website and several others that I manage.
       tech:
         - Go
     - title: gifff
       link: https://github.com/michaelenger/gifff
-      description: Tiny command-line tool used for fetching gif images based on a search term.
+      description: Tiny command-line tool used for fetching gif images based on a search term. Features wrapping the resulting URL in some Markdown, and keeping a cache of already-seen images.
       tech:
         - Rust
