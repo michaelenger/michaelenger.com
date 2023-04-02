@@ -63,11 +63,11 @@ data:
       location: Oslo, Norway
       year: 2009
   projects:
-    - title: ポテート
-      link: https://github.com/michaelenger/poteto
-      description: An implementation of the single-page RPG "Potato" for the WASM-4 fantasy console.
+    - title: Galleri
+      link: https://github.com/michaelenger/Galleri
+      description: Basic image gallery for macOS, with support for animated GIFs.
       tech:
-        - Rust
+        - Swift
     - title: brage
       link: https://github.com/michaelenger/brage
       description: Command-line tool for generating static websites based on Markdown and Go text templates. Was used to build this website and several others that I manage.
