@@ -59,7 +59,7 @@ header {
 }
 
 html {
-	background: linear-gradient(#0f172a, #162342);
+	background: linear-gradient(#0f172a, #162342) #0f172a;
 	background-attachment: fixed;
 	color: #c3c3c3;
 }
