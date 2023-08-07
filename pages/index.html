@@ -1,36 +1,45 @@
 <section id="projects">
 	<h2>Projects</h2>
 	<ul class="list">
-		{{ range .Data.projects }}
+		{{# data.projects }}
 		<li>
-			<h3><a href="{{ .link }}">
-				{{ .title }}<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" focusable="false"><path d="M13,14H3c-0.6,0-1-0.4-1-1V3c0-0.6,0.4-1,1-1h5v1H3v10h10V8h1v5C14,13.6,13.6,14,13,14z"></path><path d="M10 1L10 2 13.3 2 9 6.3 9.7 7 14 2.7 14 6 15 6 15 1z"></path></svg>
+			<h3><a href="{{ link }}">
+				<span>{{ title }}</span>
+				{{> link-icon }}
 			</a></h3>
-			<p>{{ .description }}</p>
-			{{ template "tech-list" .tech }}
+			<p>{{ description }}</p>
+			{{> tech-list }}
 		</li>
-		{{ end }}
+		{{/ data.projects }}
 	</ul>
 </section>
 <section id="experience">
 	<h2>Work Experience</h2>
 	<ul class="list">
-		{{ range .Data.experience }}
+		{{# data.experience }}
 		<li>
-			<h3>{{ .title }}, {{ .employer }}<span class="separator"> &middot; </span><span class="date">{{ .date }}</span></h3>
-			{{ markdown .description }}
-			{{ template "tech-list" .tech }}
+			<h3>
+				{{ title }},
+				{{# link }}<a href="{{ link }}">
+					<span>{{ employer }}</span>
+					{{> link-icon }}
+				</a>{{/ link }}
+				{{^ link }}{{ employer }}{{/ link }}
+				<span class="separator"> &middot; </span>
+				<span class="date">{{ date }}</span></h3>
+			<p>{{ description }}</p>
+			{{> tech-list }}
 		</li>
-		{{ end }}
+		{{/ data.experience }}
 	</ul>
 </section>
 <section id="education">
 	<h2>Education</h2>
 	<ul class="list">
-		{{ range .Data.education }}
+		{{# data.education }}
 		<li><p>
-			{{ .school }}; {{ .location }} – <span class="degree">{{ .degree }}</span>, {{ .year }}
+			{{ school }}; {{ location }} – <span class="degree">{{ degree }}</span>, {{ year }}
 		</p></li>
-		{{ end }}
+		{{/ data.education }}
 	</ul>
 </section>
