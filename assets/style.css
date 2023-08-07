@@ -107,8 +107,19 @@ ul {
 	font-weight: bold;
 }
 
-#projects svg {
+.list a {
+	text-decoration: none;
+}
+
+.list a span {
+	text-decoration: underline;
+}
+
+.list a svg {
 	height: 0.6em;
+	margin-left: -0.4em;
+	position: relative;
+	top: 0;
 	width: 0.6em;
 }
 
