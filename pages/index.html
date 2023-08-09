@@ -1,45 +1,7 @@
-<section id="projects">
-	<h2>Projects</h2>
-	<ul class="list">
-		{{# data.projects }}
-		<li>
-			<h3><a href="{{ link }}">
-				<span>{{ title }}</span>
-				{{> link-icon }}
-			</a></h3>
-			<p>{{ description }}</p>
-			{{> tech-list }}
-		</li>
-		{{/ data.projects }}
-	</ul>
+<section id="bio">
+	<img src="/assets/happybass.png" alt="A picture of me from a Young Fatigue show. I'm sweaty and laughing about something.">
+	<p>Hi, I'm Michael! I'm a musician and software engineer from Norway, currently living in London. I like fast music and clean code, and endeavour to create both.</p>
+	<p>When I'm not making stuff I can usually be found at concert, so <a rel="me" href="https://hachyderm.io/@michaelenger">hit me up</a> if you know any I should check out.</p>
 </section>
-<section id="experience">
-	<h2>Work Experience</h2>
-	<ul class="list">
-		{{# data.experience }}
-		<li>
-			<h3>
-				{{ title }},
-				{{# link }}<a href="{{ link }}">
-					<span>{{ employer }}</span>
-					{{> link-icon }}
-				</a>{{/ link }}
-				{{^ link }}{{ employer }}{{/ link }}
-				<span class="separator"> &middot; </span>
-				<span class="date">{{ date }}</span></h3>
-			<p>{{ description }}</p>
-			{{> tech-list }}
-		</li>
-		{{/ data.experience }}
-	</ul>
-</section>
-<section id="education">
-	<h2>Education</h2>
-	<ul class="list">
-		{{# data.education }}
-		<li><p>
-			{{ school }}; {{ location }} – <span class="degree">{{ degree }}</span>, {{ year }}
-		</p></li>
-		{{/ data.education }}
-	</ul>
-</section>
+
+<section></section>

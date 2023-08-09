@@ -1,0 +1,47 @@
+<section id="projects">
+	<h2>Projects</h2>
+	<ul class="portfolio-list">
+		{{# data.projects }}
+		<li>
+			<h3><a href="{{ link }}">
+				<span>{{ title }}</span>
+				{{> link-icon }}
+			</a></h3>
+			<p>{{ description }}</p>
+			{{> tech-list }}
+		</li>
+		{{/ data.projects }}
+	</ul>
+</section>
+
+<section id="experience">
+	<h2>Work Experience</h2>
+	<ul class="portfolio-list">
+		{{# data.experience }}
+		<li>
+			<h3>
+				{{ title }},
+				{{# link }}<a href="{{ link }}">
+					<span>{{ employer }}</span>
+					{{> link-icon }}
+				</a>{{/ link }}
+				{{^ link }}{{ employer }}{{/ link }}
+				<span class="separator"> &middot; </span>
+				<span class="date">{{ date }}</span></h3>
+			<p>{{ description }}</p>
+			{{> tech-list }}
+		</li>
+		{{/ data.experience }}
+	</ul>
+</section>
+
+<section id="education">
+	<h2>Education</h2>
+	<ul class="portfolio-list">
+		{{# data.education }}
+		<li><p>
+			{{ school }}; {{ location }} – <span class="degree">{{ degree }}</span>, {{ year }}
+		</p></li>
+		{{/ data.education }}
+	</ul>
+</section>
