@@ -109,7 +109,6 @@ nav ul {
 
 p {
 	line-height: 1.35em;
-	margin: 0.5em 0;
 }
 
 section {
@@ -195,6 +194,10 @@ time {
 
 .portfolio-list li:last-child {
 	margin-bottom: 0;
+}
+
+.portfolio-list p {
+	margin: 0.5em 0;
 }
 
 .tech-list {
