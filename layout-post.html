@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width">
+        <meta name="description" content="{{ post.description }}">
+        <meta name="theme-color" content="#0f172a" />
+
+        <meta property="og:title" content="{{ post.title }}">
+        <meta property="og:description" content="{{ post.description }}">
+        <meta property="og:url" content="{{ site.root_url }}{{ post.path }}">
+        <meta property="og:locale" content="en_GB">
+        <meta property="og:site_name" content="{{ site.title }}">
+        <meta property="og:type" content="article">
+
+        <meta name="twitter:title" content="{{ site.title }}">
+        <meta name="twitter:description" content="{{ post.description }}">
+        <meta name="twitter:card" content="summary">
+
+        <title>{{ post.title }} - {{ site.title }}</title>
+
+        <link rel="stylesheet" type="text/css" href="/assets/style.css">
+        <link rel="shortcut icon" href="/assets/{{ site.image }}">
+	</head>
+	<head>
+
+	<body>
+		<div id="container">
+			{{> header }}
+			<article>
+				<h2>{{ post.title }}</h2>
+				<time datetime="{{ post.date }}">{{ post.date }}</time>
+
+				{{{ content }}}
+			</article>
+			{{> footer }}
+		</div>
+	</body>
+</html>
