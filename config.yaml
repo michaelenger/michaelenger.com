@@ -73,7 +73,7 @@ data:
         Swift: asd
     - title: brage
       link: https://github.com/michaelenger/brage
-      description: Command-line tool for generating static websites based on Markdown and Go text templates. Was used to build this website and several others that I manage.
+      description: Command-line tool for generating static websites based on Markdown and Mustache templates. Was used to build this website and several others that I manage.
       tech:
         Go: true
     - title: gifff
