@@ -28,10 +28,12 @@
 		<div id="container">
 			{{> header }}
 			<article>
-				<h2>{{ post.title }}</h2>
 				<time datetime="{{ post.date }}">{{ post.date }}</time>
 
+				<h1>{{ post.title }}</h1>
+
 				{{{ content }}}
+
 			</article>
 			{{> footer }}
 		</div>
