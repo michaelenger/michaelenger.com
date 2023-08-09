@@ -1,0 +1,11 @@
+<section id="posts">
+	<h2>Latest Posts</h2>
+	<ol>
+		{{# site.posts }}
+		<li>
+			<a href="{{ path }}">{{ title }}</a>
+			<time datetime="{{ date }}">{{ date }}</time>
+		</li>
+		{{/ site.posts }}
+	</ol>
+</section>

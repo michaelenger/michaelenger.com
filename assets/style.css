@@ -1,3 +1,8 @@
+:root {
+	--color-dim: #7f7f7f;
+	--color-highlight: #b591dd;
+}
+
 ::selection {
 	background: #7d46bb;
 }
@@ -44,7 +49,7 @@ h1 a:hover {
 }
 
 h2 {
-	color: #b591dd;
+	color: var(--color-highlight);
 	font-size: 24pt;
 	line-height: 1.5em;
 	margin-bottom: 0.5em;
@@ -121,6 +126,11 @@ svg {
 	width: 1em;
 }
 
+time {
+	color: var(--color-dim);
+	font-size: 0.85em;
+}
+
 #bio {
 	font-size: 14pt;
 }
@@ -141,6 +151,20 @@ svg {
 
 #education .degree {
 	font-weight: bold;
+}
+
+#posts ol {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+#posts a {
+	text-decoration: none;
+}
+
+#posts a:hover {
+	text-decoration: underline;
 }
 
 .portfolio-list {
@@ -174,7 +198,7 @@ svg {
 }
 
 .tech-list {
-	color: #7f7f7f;
+	color: var(--color-dim);
 	list-style: none;
 	margin: 0;
 	padding: 0;
