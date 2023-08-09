@@ -35,6 +35,13 @@ article h1 {
 	margin: 0.2em 0 0.5em;
 }
 
+article h2 {
+	color: inherit;
+	font-size: 18pt;
+	line-height: 1em;
+	margin: 0.5em 0;
+}
+
 body {
 	font-family: 'PT Mono', Georgia, serif;
 	font-size: 12pt;
@@ -119,7 +126,7 @@ nav ul {
 }
 
 p {
-	line-height: 1.35em;
+	line-height: 1.5em;
 }
 
 section {
@@ -161,6 +168,10 @@ time {
 
 #education .degree {
 	font-weight: bold;
+}
+
+#posts li {
+	margin: 1em 0;
 }
 
 #posts ol {
