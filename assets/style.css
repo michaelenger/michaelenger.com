@@ -1,3 +1,8 @@
+:root {
+	--color-dim: #7f7f7f;
+	--color-highlight: #b591dd;
+}
+
 ::selection {
 	background: #7d46bb;
 }
@@ -17,6 +22,17 @@ a svg:first-child {
 
 a svg:last-child {
 	margin-left: 0.3em;
+}
+
+article {
+	margin: 2em 0;
+}
+
+article h1 {
+	color: var(--color-highlight);
+	font-size: 24pt;
+	line-height: 1.5em;
+	margin: 0.2em 0 0.5em;
 }
 
 body {
@@ -44,13 +60,13 @@ h1 a:hover {
 }
 
 h2 {
-	color: #b591dd;
+	color: var(--color-highlight);
 	font-size: 24pt;
 	line-height: 1.5em;
 	margin-bottom: 0.5em;
 }
 
-h3 {
+h3, h4, h5, h6 {
 	margin: 0;
 }
 
@@ -65,6 +81,7 @@ html {
 }
 
 img {
+	border-radius: 0.25em;
 	max-width: 100%;
 }
 
@@ -72,12 +89,41 @@ main {
 	margin: 4em 0;
 }
 
+nav {
+	text-transform: lowercase;
+}
+
+nav a {
+	text-decoration: none;
+}
+
+nav a:hover {
+	text-decoration: underline;
+}
+
+nav li::after {
+	content: '·';
+	margin: 0 1em;
+}
+
+nav li:last-child::after {
+	display: none;
+}
+
+nav ul {
+	display: flex;
+	list-style: none;
+	justify-content: center;
+	margin: 0;
+	padding: 0;
+}
+
 p {
 	line-height: 1.35em;
-	margin: 0.5em 0;
 }
 
 section {
+	clear: both;
 	margin-bottom: 2em;
 }
 
@@ -90,10 +136,20 @@ svg {
 	width: 1em;
 }
 
-ul {
-	list-style: none;
-	margin: 0;
-	padding: 0;
+time {
+	color: var(--color-dim);
+	font-size: 0.85em;
+}
+
+#bio {
+	font-size: 14pt;
+}
+
+#bio img {
+	display: block;
+	float: right;
+	margin-left: 1em;
+	width: 40%;
 }
 
 #container {
@@ -107,15 +163,35 @@ ul {
 	font-weight: bold;
 }
 
-.list a {
+#posts ol {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+#posts a {
 	text-decoration: none;
 }
 
-.list a span {
+#posts a:hover {
 	text-decoration: underline;
 }
 
-.list a svg {
+.portfolio-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.portfolio-list a {
+	text-decoration: none;
+}
+
+.portfolio-list a span {
+	text-decoration: underline;
+}
+
+.portfolio-list a svg {
 	height: 0.6em;
 	margin-left: -0.4em;
 	position: relative;
@@ -123,16 +199,23 @@ ul {
 	width: 0.6em;
 }
 
-.list li {
+.portfolio-list li {
 	margin-bottom: 1.5em;
 }
 
-.list li:last-child {
+.portfolio-list li:last-child {
 	margin-bottom: 0;
 }
 
+.portfolio-list p {
+	margin: 0.5em 0;
+}
+
 .tech-list {
-	color: #7f7f7f;
+	color: var(--color-dim);
+	list-style: none;
+	margin: 0;
+	padding: 0;
 }
 
 .tech-list li {
@@ -141,7 +224,7 @@ ul {
 	margin-right: 0.5em;
 }
 
-.list li:last-child {
+.tech-list li:last-child {
 	margin-right: 0;
 }
 
@@ -150,6 +233,13 @@ ul {
 }
 
 @media only screen and (max-width: 720px) {
+	#bio img {
+		display: block;
+		float: none;
+		margin: 1em 0;
+		width: 100%;
+	}
+
 	#experience h3 {
 		line-height: 1.5em;
 	}
