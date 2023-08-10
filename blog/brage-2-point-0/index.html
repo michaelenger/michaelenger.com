@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width">
+        <meta name="description" content="">
+        <meta name="theme-color" content="#0f172a" />
+
+        <meta property="og:title" content="Brage 2.0: Redesigning My Static Site Generator">
+        <meta property="og:description" content="">
+        <meta property="og:url" content="https://michaelenger.com/blog/brage-2-point-0">
+        <meta property="og:locale" content="en_GB">
+        <meta property="og:site_name" content="Michael Enger">
+        <meta property="og:type" content="article">
+
+        <meta name="twitter:title" content="Michael Enger">
+        <meta name="twitter:description" content="">
+        <meta name="twitter:card" content="summary">
+
+        <title>Brage 2.0: Redesigning My Static Site Generator - Michael Enger</title>
+
+        <link rel="stylesheet" type="text/css" href="/assets/style.css">
+        <link rel="shortcut icon" href="/assets/happybass.png">
+	</head>
+	<head>
+
+	<body>
+		<div id="container">
+			<header>
+				<h1><a href="/">Michael Enger</a></h1>
+				<nav>
+					<ul>
+						<li><a href="/">Home</a></li>
+						<li><a href="/blog">Blog</a></li>
+						<li><a href="/portfolio">Portfolio</a></li>
+					</ul>
+				</nav>
+			</header>
+			<article>
+				<time datetime="2023-09-10">2023-09-10</time>
+
+				<h1>Brage 2.0: Redesigning My Static Site Generator</h1>
+
+				<h2>The Beginning</h2>
+<p>Recently I was inspired by some friends to start a blog. This won't be my first foray into the Blogosphere™ as I ran a personal blog from about 2005 to 2011 where I wrote about games, programming, and all sorts of nerd stuff. The blog came to an unceremonious end when my GoDaddy domain expired and instead of telling me about it they sold it to some rando who scraped all my content and resurrected the blog under his control alongside ads for brain enhancing drugs. I stopped using GoDaddy and stopped blogging...</p>
+<p>Until now! More than a decade has come and gone, I'm at a different job in a different country and I have a lot more tattoos. So the way I am approaching this new blog is going to be a bit different than last time. What I'll write about will probably be more of the same, but the more interesting thing is what tech I want to use.</p>
+<p>The old blog was run on various systems, at one point Tumblr, at one point WordPress, and for a long time I was managing a home-made PHP application. But as time has changed me it has also changed web technology. I was there to witness the commercial world go from PHP monoliths to Node.js microservices to Single-Page Applications, and if I am honest the progress has made me weary. To say I have JavaScript fatigue is to grossly misrepresent my resentment.</p>
+<p>However, one trend that I have embraced fully is static site generators. They take source files, usually written in <a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a>, and combine them with some assets and some styling to spit out flat HTML files. Some of them still insist on also running an SPA on top, but most just produce a bunch of files that can be uploaded to any number of hosting services.</p>
+<p>Enter <a href="https://github.com/michaelenger/brage">Brage</a>, a static site generator I wrote in Swift and then re-wrote in Go. I created it because the other static site generators I was looking into (like <a href="https://jekyllrb.com/">Jekyll</a> and <a href="https://gohugo.io/">Hugo</a>) felt too heavy and cumbersome for my needs. Why were they too heavy? Ironically because they were focused on supporting blogs whereas I just wanted simple websites.</p>
+<p>I originally built Brage to help me maintain the websites for <a href="https://youngfatigue.com/">Young Fatigue</a> (a band I'm in) and <a href="https://mortenmyklebust.com/">Morten Myklebust</a> (an artist I'm friends with), alongside my own. I wanted to be able to create the pages in HTML and Markdown, and have the generator combine it with a layout so that I didn't have to change every page manually every time I made stylistic changes. I also wanted to be able to provide some data (in YAML format) and have a template engine turn it into HTML. For example, <a href="https://michaelenger.com/portfolio/">my portfolio</a> is defined as a bunch of lists containing meta data for each entry. This makes it super easy to add or remove things. The source for this website is <a href="https://github.com/michaelenger/michaelenger.github.io">available on GitHub</a> if you're curious as to how it all fits together.</p>
+<p>But now that I <em>do</em> want to blog my options are to either use an existing generator, or to modify Brage to support it. And what kind of massive nerd would I be if I didn't choose the latter?</p>
+<h2>The Design</h2>
+<p><em>Note: I'm writing this post after the work has been completed, so I can (and do) omit any mistakes or bad ideas I originally had.</em></p>
+<p>Like all good software projects I started with a list of requirements... which I subsequently ignored when the real work began. I like using lists to collect my thoughts, but as this project was for my own personal need it was bound to changed as I went along. The overall goal was to support some sort of time-based content with the following traits:</p>
+<ul>
+<li>They all live under a specific URI (it ended up being <code>/blog</code>).</li>
+<li>They contain meta data: title and date. I also wanted to have tags at some point, but they seemed to add a lot of complexity so I dropped it.</li>
+<li>I will be able to list them all out in one of my templates using some variable (which turned out to be <code>site.posts</code>).</li>
+</ul>
+<p>Since I was already going to do a bunch of work I also had some improvements that I wanted to implement:</p>
+<ul>
+<li>Support for other file extensions. I originally only supported <code>.html</code> and <code>.markdown</code>, but I very much wanted to use <code>.md</code> for Markdown files.</li>
+<li>Change from using Go templates to using <a href="https://mustache.github.io/">Mustache</a>. This was because I wanted the templating to be independent of the programming language I used. When Brage was written in Swift I used <a href="https://stencil.fuller.li/">Stencil</a> so when I changed to Go I had to change every single template in all the sites. I needed to do that again if I were to migrate to Mustache, but at least I won't have to do it a fourth time if I ever get tired of Go.</li>
+</ul>
+<p>I want to take a moment to consider the philosophy behind a bunch of my decisions. As this project has a target user base of one person I don't really have to take into consideration how others <em>may</em> want to use it. I know exactly how I would want to use it so I could avoid a lot of complexity by not implementing any other options. I know that frameworks like Ruby on Rails gets some flak for their adherence to <a href="https://en.wikipedia.org/wiki/Convention_over_configuration">Convention over Configuration</a> but in this case it didn't really matter. If nobody other than ever uses Brage it would still be a successful projects, so I can save a lot of time by just making it do only what I want.</p>
+<p>This is the justification for a decision that sets my site generator apart from many others out there: it doesn't use themes. With other generators you define your content and it will combine that with a theme, either pre-made or created by you, to generate the final HTML. Since I wanted Brage to help me manage a small handful of wildly different sites it was overkill to add any sort of theming support. The styling, structure, and content all live in a single directory and I just point Brage at it and we're done.</p>
+<p>However, a drawback to not having themes is that I then can't share templates between projects, but that was an easy problem to just ignore. I already had support for partials so I could easily copy files between projects if I needed to. Brage has already been super useful for the past two years, so I had no desire to add any sort of complexity for a feature I'd probably not use.</p>
+<h2>The Implementation</h2>
+<p>When I started working on version 2.0 I <em>almost</em> made the mistake that a lot of developers make: I almost started from scratch.</p>
+<p>I was really close, too. I had created a <code>v2</code> branch in the project's repository and had removed everything other than the <code>README</code>, <code>LICENSE</code>, and <code>main.go</code> files. Then I though I didn't want to redo a bunch of the grunt work so I copied over some utility files from the <code>main</code> branch... followed by a bunch more files... and then some more, before I finally stopped and realised that I was being an actual idiot.</p>
+<p>This may be my personal project with a target demographic of one, but am I not a professional programming person? Haven't I been doing this for like two decades? There is an inexplicable pleasure associated with starting fresh new projects, but I have, like many of my peers, a trail of abandoned half-finished code bases behind me. Ones that once had me enraptured for weeks but were eventually left to languish as my fickle attention was turned elsewhere. I realised that throwing it all out and starting with a blank slate was a recipe for not getting it done.</p>
+<p>So I bit the bullet, got all the deleted files back, and waded into my own many-months-old legacy code to make changes. And given that I am writing this after having successfully completed Brage 2.0, I do not regret my decision at all.</p>
+<p>The work went surprisingly fast, probably due to the fact that the code was relatively new and my patterns hadn't had time to change much. I worked in a way that I felt was ambitious but allowed for clear, gradual progress: Brage has an <code>init</code> command which spits out an example site that works as boilerplate, but also can function as documentation for how to structure the site. So I just changed the command to spit out a site in a format that I wanted Brage to eventually support. That way I would have a static target to aim for while I made changes.</p>
+<p>This ended up being a great idea as I was essentially doing Test-Driven Development without writing any tests. The test was just whether the site looked like I expected and didn't have any errors when rendering. Of course as I was modifying the generator to work with the new templates and configurations I was also cleaning up and refactoring as I saw fit. This was my own project after all, so I could do exactly as I pleased.</p>
+<h2>The Result</h2>
+<p><a href="https://github.com/michaelenger/brage">Brage</a> is now in version 2.0 and supports blog posts! It uses Mustache and Markdown templates, and lets you define any kind of extra data using YAML. It comes as a single executable and with it you can easily create sites that sit in a single self-contained repository with no dependencies.</p>
+<p>I didn't get to do all the things I wanted, but I try to follow a philosophy of focusing on getting the first 90% done and leaving the other 90% for later. It's incredibly rewarding to have a project that I can actually use, and if I continuously use it I will get inspired to work on it even more later. That way I can (maybe) avoid adding it to the pile of <del>corpses</del> abandoned projects I've left in my wake.</p>
+<p>As to whether this is the beginning of a decade of continuous writing, or if I will end up publishing one thing every few years and then giving up is yet to be seen. The most important thing is that I had fun building Brage. For myself.</p>
+
+
+			</article>
+			<footer>
+				<a href="https://www.instagram.com/michaelenger/" aria-label="Instagram link">
+					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 217.408 217.408" xml:space="preserve" fill="currentColor" aria-hidden="true">
+						<path d="M194.078,22.682c-10.747-8.193-22.606-12.348-35.248-12.348c-15.951,0-33.181,6.808-50.126,19.754
+							C91.759,17.142,74.529,10.334,58.578,10.334c-12.642,0-24.501,4.155-35.248,12.348C7.606,34.671-0.24,49.8,0.006,67.648
+							c0.846,61.117,100.093,133.233,104.317,136.273l4.381,3.153l4.381-3.153c4.225-3.04,103.472-75.156,104.317-136.273
+							C217.648,49.8,209.802,34.671,194.078,22.682z M153.833,149.017c-18.374,18.48-36.915,33.188-45.129,39.453
+							c-8.214-6.265-26.755-20.972-45.129-39.453c-31.479-31.661-48.274-59.873-48.57-81.585c-0.178-13.013,5.521-23.749,17.421-32.822
+							c8.073-6.156,16.872-9.277,26.152-9.277c17.563,0,34.338,10.936,45.317,20.11l4.809,4.018l4.809-4.018
+							c10.979-9.174,27.754-20.11,45.317-20.11c9.28,0,18.079,3.121,26.152,9.277c11.9,9.073,17.599,19.809,17.421,32.822
+							C202.107,89.145,185.311,117.356,153.833,149.017z" />
+					</svg>
+				</a>
+			</footer>
+		</div>
+	</body>
+</html>
