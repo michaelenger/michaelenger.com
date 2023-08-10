@@ -1,0 +1,20 @@
+<section id="music">
+	<h2>Music</h2>
+
+	<p>I've been involved in a bunch of bands and contributed to several different projects over the years. I am only documenting my own contribution and have shared credit on all of the songs. Most (if not all) are available on your streaming platform of choice.</p>
+
+	{{# data.music }}
+
+	<h3>{{ year }}</h3>
+
+	<ul class="song-list">
+		{{# songs }}
+		<li>
+			<h4>{{ artist }} - {{ title }}</h4>
+			<p>{{ credits }}</p>
+		</li>
+		{{/ songs }}
+	</ul>
+
+	{{/ data.music }}
+</section>

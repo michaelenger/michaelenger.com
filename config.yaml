@@ -81,3 +81,160 @@ data:
       description: Tiny command-line tool used for fetching gif images based on a search term. Features wrapping the resulting URL in some Markdown, and keeping a cache of already-seen images.
       tech:
         Rust: true
+  music:
+    - year: 2022
+      songs:
+        - artist: Beyond The Barricade
+          title: Weightless (stripped)
+          credits: Lyrics
+        - artist: Hilltops Are For Dreamers
+          title: Silence
+          credits: Vocals
+        - artist: Hilltops Are For Dreamers
+          title: Severe Serenity
+          credits: Vocals
+        - artist: Hilltops Are For Dreamers
+          title: Healing After the Fall
+          credits: Vocals
+        - artist: Hilltops Are For Dreamers
+          title: The Tide
+          credits: Vocals
+        - artist: Hilltops Are For Dreamers
+          title: Turn Into Oblivion
+          credits: Vocals
+        - artist: Hilltops Are For Dreamers
+          title: The Sirens Woe
+          credits: Vocals
+        - artist: Hilltops Are For Dreamers
+          title: Revival
+          credits: Vocals
+        - artist: Hilltops Are For Dreamers
+          title: Unsoiled Soul
+          credits: Vocals
+        - artist: Yeah, Nevermind
+          title: Mona Avdahlia—Vampire
+          credits: Lyrics, Composition, Vocals, Bass
+        - artist: Yeah, Nevermind
+          title: The One Who Got Away
+          credits: Lyrics, Composition, Vocals, Bass
+        - artist: Yeah, Nevermind
+          title: Hollow
+          credits: Lyrics, Composition, Vocals, Acoustic Guitar
+        - artist: Young Fatigue
+          title: Top 10 Anime Betrayals
+          credits: Bass
+        - artist: Young Fatigue
+          title: I Want (Everything)
+          credits: Bass
+        - artist: Young Fatigue
+          title: love/them
+          credits: Bass, Vocals
+    - year: 2021
+      songs:
+        - artist: Beyond The Barricade
+          title: Wither
+          credits: Lyrics, Composition, Vocals, Acoustic Guitar
+        - artist: Beyond The Barricade
+          title: Bring Me To Life
+          credits: Vocals
+        - artist: Beyond The Barricade
+          title: Trapped
+          credits: Lyrics, Composition, Vocals
+        - artist: Beyond The Barricade
+          title: Set It Free
+          credits: Lyrics, Composition, Vocals
+        - artist: Beyond The Barricade
+          title: Forgotten
+          credits: Lyrics, Composition, Vocals
+        - artist: Beyond The Barricade
+          title: Marching On
+          credits: Lyrics, Composition, Vocals
+        - artist: Beyond The Barricade
+          title: Born In The Rain
+          credits: Lyrics, Composition, Vocals
+        - artist: Beyond The Barricade
+          title: Dreamer
+          credits: Lyrics, Composition, Vocals
+        - artist: Beyond The Barricade
+          title: Honesty
+          credits: Lyrics, Composition, Vocals
+        - artist: Beyond The Barricade
+          title: Circles
+          credits: Lyrics, Composition, Vocals
+        - artist: Beyond The Barricade
+          title: Falling
+          credits: Lyrics, Composition, Vocals
+        - artist: Beyond The Barricade
+          title: Weightless
+          credits: Lyrics, Composition, Vocals
+        - artist: Young Fatigue
+          title: Am I Pretty Now?
+          credits: Bass
+    - year: 2020
+      songs:
+        - artist: Beyond The Barricade
+          title: Forest
+          credits: Lyrics, Composition, Vocals
+        - artist: Beyond The Barricade
+          title: Reflections
+          credits: Lyrics, Composition, Vocals
+        - artist: Beyond The Barricade
+          title: S I C K N E S S
+          credits: Lyrics, Composition, Vocals
+        - artist: Hilltops Are For Dreamers
+          title: The Tide
+          credits: Vocals
+        - artist: Hilltops Are For Dreamers
+          title: All We Need
+          credits: Vocals
+        - artist: Young Fatigue
+          title: Dislocation
+          credits: Bass
+    - year: 2018
+      songs:
+        - artist: Beyond The Barricade
+          title: Splitting the Silence
+          credits: Lyrics, Composition, Vocals
+        - artist: Beyond The Barricade
+          title: The Grey
+          credits: Lyrics, Composition, Vocals
+        - artist: Beyond The Barricade
+          title: A Letter of Hopelessness
+          credits: Lyrics, Composition, Vocals
+        - artist: Beyond The Barricade
+          title: Shattering
+          credits: Lyrics, Composition, Vocals
+        - artist: Beyond The Barricade
+          title: The River Runs Deep
+          credits: Lyrics, Composition, Vocals
+    - year: 2016
+      songs:
+        - artist: Firetop Mountain
+          title: Failed to Start
+          credits: Lyrics
+        - artist: Firetop Mountain
+          title: Complications
+          credits: Lyrics
+        - artist: Firetop Mountain
+          title: Connected
+          credits: Lyrics
+        - artist: Firetop Mountain
+          title: Derelict Me
+          credits: Lyrics
+    - year: 2013
+      songs:
+        - artist: Firetop Mountain
+          title: All the Best Ideas
+          credits: Bass
+        - artist: Firetop Mountain
+          title: Fearless
+          credits: Bass
+        - artist: Firetop Mountain
+          title: Paper Planes
+          credits: Bass
+        - artist: Firetop Mountain
+          title: Everyone Loves a Witch Hunt
+          credits: Bass
+        - artist: Firetop Mountain
+          title: Spiders
+          credits: Bass
