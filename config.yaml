@@ -82,6 +82,11 @@ data:
       tech:
         Rust: true
   music:
+    - year: 2023
+      songs:
+        - artist: LionBlud
+          title: VOIDBREAKER VIP
+          credits: Lyrics, Composition, Vocals
     - year: 2022
       songs:
         - artist: Beyond The Barricade
