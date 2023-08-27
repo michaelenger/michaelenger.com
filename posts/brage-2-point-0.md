@@ -1,6 +1,6 @@
 ---
 title: "Brage 2.0: Redesigning My Static Site Generator"
-date: 2023-09-10
+date: 2023-08-10
 ---
 
 ## The Beginning
