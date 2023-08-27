@@ -44,9 +44,9 @@ article h2 {
 }
 
 article img {
-	margin: 0 -5%;
-	max-width: 110%;
-	width: 110%;
+	margin: 0 -2.5%;
+	max-width: 105%;
+	width: 105%;
 }
 
 body {
@@ -54,23 +54,6 @@ body {
 	font-size: 12pt;
 	font-weight: lighter;
 	margin: 0;
-}
-
-p > code {
-	background: #233257;
-	border-radius: var(--border-radius);
-	font-size: 85%;
-	margin: 0;
-	padding: .2em .4em;
-	white-space: break-spaces;
-}
-
-pre {
-	background: #233257;
-	border-radius: var(--border-radius);
-	font-size: 85%;
-	padding: 1em;
-	white-space: break-spaces;
 }
 
 footer {
@@ -151,6 +134,25 @@ nav ul {
 
 p {
 	line-height: 1.5em;
+}
+
+p > code {
+	background: #233257;
+	border-radius: var(--border-radius);
+	font-size: 85%;
+	margin: 0;
+	padding: .2em .4em;
+	white-space: break-spaces;
+}
+
+pre {
+	background: #233257;
+	border-radius: var(--border-radius);
+	font-size: 85%;
+	margin: 0 -2.5%;
+	padding: 2.5%;
+	white-space: break-spaces;
+	width: 105%;
 }
 
 section {
@@ -296,7 +298,8 @@ time {
 }
 
 @media only screen and (max-width: 1200px) {
-	article img {
+	article img,
+	pre {
 		margin: 0%;
 		max-width: 100%;
 		width: 100%;
