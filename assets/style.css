@@ -43,6 +43,12 @@ article h2 {
 	margin: 0.5em 0;
 }
 
+article img {
+	margin: 0 -5%;
+	max-width: 110%;
+	width: 110%;
+}
+
 body {
 	font-family: 'PT Mono', Georgia, serif;
 	font-size: 12pt;
@@ -287,6 +293,14 @@ time {
 
 .tech-list svg {
 	margin-right: 0.5em;
+}
+
+@media only screen and (max-width: 1200px) {
+	article img {
+		margin: 0%;
+		max-width: 100%;
+		width: 100%;
+	}
 }
 
 @media only screen and (max-width: 720px) {
