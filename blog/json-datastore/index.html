@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width">
+        <meta name="description" content="">
+        <meta name="theme-color" content="#0f172a" />
+
+        <meta property="og:title" content="Using JSON as a Data Store for a TypeScript Application">
+        <meta property="og:description" content="">
+        <meta property="og:url" content="https://michaelenger.com/blog/json-datastore">
+        <meta property="og:locale" content="en_GB">
+        <meta property="og:site_name" content="Michael Enger">
+        <meta property="og:type" content="article">
+
+        <meta name="twitter:title" content="Michael Enger">
+        <meta name="twitter:description" content="">
+        <meta name="twitter:card" content="summary">
+
+        <title>Using JSON as a Data Store for a TypeScript Application - Michael Enger</title>
+
+        <link rel="stylesheet" type="text/css" href="/assets/style.css">
+        <link rel="shortcut icon" href="/assets/happybass.png">
+	</head>
+	<head>
+
+	<body>
+		<div id="container">
+			<header>
+				<h1><a href="/">Michael Enger</a></h1>
+				<nav>
+					<ul>
+						<li><a href="/">Home</a></li>
+						<li><a href="/blog">Blog</a></li>
+						<li><a href="/code">Code</a></li>
+						<li><a href="/music">Music</a></li>
+					</ul>
+				</nav>
+			</header>
+			<article>
+				<time datetime="2023-08-28">2023-08-28</time>
+
+				<h1>Using JSON as a Data Store for a TypeScript Application</h1>
+
+				<p>Let's start with some context: <a href="https://www.giantbomb.com">Giant Bomb</a> is a website about video games. It was created in 2008 (15 years ago as of this writing) by Jeff Gerstmann and Ryan Davis as a response to Gerstmann's tactless firing from GameSpot, another website about video games. It has had a tumultuous life, having switched corporate owners many times, and last year the new owners decided to make the most ironic of moves by firing Gerstmann from the website he founded. This decision had the effect of radicalising a bunch of long-time fans into extracting all the video content and uploading it to <a href="https://archive.org/details/giant-bomb-archive">a collection on Internet Archive</a>. The legality of this questionable, but media conglomerates are notorious for shutting down websites without warning and we'd rather skirt the law than have the content disappear off the Internet.</p>
+<p>However, the collection isn't particularly nice to browse if you're looking for a specific video or show, so I thought I'd volunteer my skills to alleviate the issue. Enter <a href="https://duders.zone/">Duders Zone</a>, a website whose design is inspired by 2010s-era Giant Bomb, and which features the videos collected into shows and with some features that (hopefully) provide a smoother browsing experience. It's built in TypeScript on <a href="https://svelte.dev/">Svelte</a> and the source is available on <a href="https://github.com/Giant-Bomb-Preservation-Project/duders-zone/">GitHub</a>.</p>
+<p>The requirements for a site like this are a bit unique as the content is, in theory, completely static but the site has a few dynamic elements which make it impossible to use a pure Static Site Generator to create it. The random page (which shows a random video) and the historic page (which shows videos for the current day/month) need to be able to fetch videos independently from their shows. It also has <em>a lot</em> of videos organised into dozens of shows, so it would need some sort of data store to contain them with the means to fetch specific videos, sort by date, etc.</p>
+<p>I considered using a formal database, but I wanted the project to have the least amount of maintenance as possible. As the videos themselves are hosted on Internet Archive the site just contains the meta data and some images, which could easily be hosted for free on any static host. The last thing I wanted was to have to run some sort of database or backend, so it all needed to be self-contained. I went back and forth on what I wanted to do for a while, but in the end I recreated a relational database using JSON.</p>
+<p>That makes it sound fancy, but in reality it's just two JSON files: one which contains the <a href="https://github.com/Giant-Bomb-Preservation-Project/duders-zone/blob/main/src/lib/data/videos.json">video meta-data</a>:</p>
+<pre><code class="language-json">[
+    {
+        &quot;id&quot;: &quot;0001-quick-look-gamecock-demos-legendary&quot;,
+        &quot;title&quot;: &quot;Quick Look: Gamecock Demos Legendary&quot;,
+        &quot;description&quot;: &quot;Gamecock shows us Legendary. We ask if we can hit record...&quot;,
+        &quot;date&quot;: &quot;2008-08-27T00:00:00Z&quot;,
+        &quot;thumbnail&quot;: &quot;https://archive.org/services/img/0001-quick-look-gamecock-demos-legendary&quot;
+    },
+    {
+        &quot;id&quot;: &quot;0002-quick-look-a-quick-look-at-burnout-bikes&quot;,
+        &quot;title&quot;: &quot;Quick Look: A Quick Look At Burnout Bikes&quot;,
+        &quot;description&quot;: &quot;Jeff takes a quick tour through the new content available for Burnout Paradise.&quot;,
+        &quot;date&quot;: &quot;2008-09-18T00:00:00Z&quot;,
+        &quot;thumbnail&quot;: &quot;https://archive.org/services/img/0002-quick-look-a-quick-look-at-burnout-bikes&quot;
+    },
+    ...
+]
+</code></pre>
+<p>And the other which contains the <a href="https://github.com/Giant-Bomb-Preservation-Project/duders-zone/blob/main/src/lib/data/shows.json">show meta-data</a>, including a list of IDs for the videos in the show:</p>
+<pre><code class="language-json">[
+    {
+        &quot;id&quot;: &quot;endurance-run&quot;,
+        &quot;title&quot;: &quot;Endurance Run&quot;,
+        &quot;description&quot;: &quot;Vinny and Jeff sit down and take a crack at the latest game in the Shin Megami Tensei series. Will they make it through the entire game?&quot;,
+        &quot;poster&quot;: &quot;2437462-persona 4.jpg&quot;,
+        &quot;logo&quot;: null,
+        &quot;videos&quot;: [
+            &quot;endurance-run-persona-4-part-01&quot;,
+            &quot;endurance-run-persona-4-part-02&quot;,
+            &quot;endurance-run-persona-4-part-03&quot;,
+            ...
+        ]
+    },
+    ...
+]
+</code></pre>
+<p>There are a myriad of other ways the data could've been modelled but in my head I was replicating the following structure:</p>
+<p><img src="/assets/blog/duders-zone-data-model.png" alt="A UML diagram showing three objects: video_show, video, and show. The video_show object contains a show_id member with an accompanying arrow pointing to the show object, as well as a video_id member with an arrow pointing to the video object."></p>
+<p>Most (if not all) JavaScript frameworks have support for loading JSON directly from source files, so that's what I did:</p>
+<pre><code class="language-typescript">import showData from '$lib/data/shows.json'
+import videoData from '$lib/data/videos.json'
+</code></pre>
+<p>This resulted in generic objects and as I was using TypeScript I needed to define type interfaces for both the video and show:</p>
+<pre><code class="language-typescript">interface Show {
+	readonly id: string
+	readonly title: string
+	readonly description: string
+	readonly logo?: string | null
+	readonly poster?: string
+	readonly videos: readonly string[]
+}
+
+interface Video {
+	readonly id: string
+	readonly title: string
+	readonly description: string
+	readonly date: Date
+	readonly show?: string
+	readonly thumbnail?: string
+}
+</code></pre>
+<p>Then I iterated through the raw data coming from the JSON files and put them into maps of their respective types, with the key being the ID. The shows went in as-is, but for the videos I converted the date from a string to a proper <code>Date</code> object so that I could do some sorting and formatting:</p>
+<pre><code class="language-typescript">const shows: { [key: string]: Show } = {}
+for (const show of showData) {
+	shows[show.id] = show
+}
+
+const videos: { [key: string]: Video } = {}
+for (const video of videoData) {
+	videos[video.id] = {
+		id: video.id,
+		title: video.title,
+		description: video.description,
+		date: new Date(video.date),
+		thumbnail: video.thumbnail,
+	}
+}
+</code></pre>
+<p>Now I had a fully typed &quot;database&quot; of content which I could use to populate the pages, but I thought that for the sake of organisation I didn't want to just pass these around. So I ended up making a bunch of helper functions that could be used to &quot;fetch&quot; data:</p>
+<pre><code class="language-typescript">function getRandomVideos(amount: number): Video[] {
+	const shuffled = Object.values(videos).sort(byRandom)
+
+	return shuffled.slice(0, amount)
+}
+
+function getShowById(id: string): Show | null {
+	return id in shows ? shows[id] : null
+}
+</code></pre>
+<p>It's a basic concept but I'm quite happy with the results. The full data store takes up a few megabytes, which is in no way too much for the web browser to handle. It's also very simple to work with and requires no extra maintenance beyond what the SPA already needs. If you're interested in more details you can always check out <a href="https://github.com/Giant-Bomb-Preservation-Project/duders-zone/blob/main/src/lib/data.ts">the full source code</a>, or you can watch <a href="https://duders.zone/shows/mario-party-party/gb-2300-11656-IDLOD6E">a bunch of grown men get angry at a video game</a>.</p>
+
+
+			</article>
+			<footer>
+				<a href="https://www.instagram.com/michaelenger/" aria-label="Instagram link">
+					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 217.408 217.408" xml:space="preserve" fill="currentColor" aria-hidden="true">
+						<path d="M194.078,22.682c-10.747-8.193-22.606-12.348-35.248-12.348c-15.951,0-33.181,6.808-50.126,19.754
+							C91.759,17.142,74.529,10.334,58.578,10.334c-12.642,0-24.501,4.155-35.248,12.348C7.606,34.671-0.24,49.8,0.006,67.648
+							c0.846,61.117,100.093,133.233,104.317,136.273l4.381,3.153l4.381-3.153c4.225-3.04,103.472-75.156,104.317-136.273
+							C217.648,49.8,209.802,34.671,194.078,22.682z M153.833,149.017c-18.374,18.48-36.915,33.188-45.129,39.453
+							c-8.214-6.265-26.755-20.972-45.129-39.453c-31.479-31.661-48.274-59.873-48.57-81.585c-0.178-13.013,5.521-23.749,17.421-32.822
+							c8.073-6.156,16.872-9.277,26.152-9.277c17.563,0,34.338,10.936,45.317,20.11l4.809,4.018l4.809-4.018
+							c10.979-9.174,27.754-20.11,45.317-20.11c9.28,0,18.079,3.121,26.152,9.277c11.9,9.073,17.599,19.809,17.421,32.822
+							C202.107,89.145,185.311,117.356,153.833,149.017z" />
+					</svg>
+				</a>
+			</footer>
+		</div>
+	</body>
+</html>

@@ -1,4 +1,5 @@
 :root {
+	--border-radius: 0.25em;
 	--color-dim: #7f7f7f;
 	--color-highlight: #b591dd;
 }
@@ -40,6 +41,12 @@ article h2 {
 	font-size: 18pt;
 	line-height: 1em;
 	margin: 0.5em 0;
+}
+
+article img {
+	margin: 0 -2.5%;
+	max-width: 105%;
+	width: 105%;
 }
 
 body {
@@ -88,7 +95,7 @@ html {
 }
 
 img {
-	border-radius: 0.25em;
+	border-radius: var(--border-radius);
 	max-width: 100%;
 }
 
@@ -127,6 +134,25 @@ nav ul {
 
 p {
 	line-height: 1.5em;
+}
+
+p > code {
+	background: #233257;
+	border-radius: var(--border-radius);
+	font-size: 85%;
+	margin: 0;
+	padding: .2em .4em;
+	white-space: break-spaces;
+}
+
+pre {
+	background: #233257;
+	border-radius: var(--border-radius);
+	font-size: 85%;
+	margin: 0 -2.5%;
+	padding: 2.5%;
+	white-space: break-spaces;
+	width: 105%;
 }
 
 section {
@@ -269,6 +295,15 @@ time {
 
 .tech-list svg {
 	margin-right: 0.5em;
+}
+
+@media only screen and (max-width: 1200px) {
+	article img,
+	pre {
+		margin: 0%;
+		max-width: 100%;
+		width: 100%;
+	}
 }
 
 @media only screen and (max-width: 720px) {
