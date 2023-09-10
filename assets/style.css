@@ -51,7 +51,7 @@ article img {
 
 body {
 	font-family: 'PT Mono', Georgia, serif;
-	font-size: 12pt;
+	font-size: 13pt;
 	font-weight: lighter;
 	margin: 0;
 }
@@ -162,6 +162,10 @@ section {
 
 section:last-child {
 	margin-bottom: 0;
+}
+
+strong {
+	font-weight: bold;
 }
 
 svg {
