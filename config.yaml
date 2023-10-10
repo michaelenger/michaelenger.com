@@ -84,6 +84,9 @@ data:
   music:
     - year: 2023
       songs:
+        - artist: Beyond The Barricade
+          title: Colours
+          credits: Lyrics
         - artist: LionBlud
           title: VOIDBREAKER VIP
           credits: Lyrics, Vocals
