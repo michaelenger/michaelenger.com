@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width">
+        <meta name="description" content="">
+        <meta name="theme-color" content="#0f172a" />
+
+        <meta property="og:title" content="Implementing Search for a Pure Frontend Application">
+        <meta property="og:description" content="">
+        <meta property="og:url" content="https://michaelenger.com/blog/frontend-search-engine">
+        <meta property="og:locale" content="en_GB">
+        <meta property="og:site_name" content="Michael Enger">
+        <meta property="og:type" content="article">
+
+        <meta name="twitter:title" content="Michael Enger">
+        <meta name="twitter:description" content="">
+        <meta name="twitter:card" content="summary">
+
+        <title>Implementing Search for a Pure Frontend Application - Michael Enger</title>
+
+        <link rel="stylesheet" type="text/css" href="/assets/style.css">
+        <link rel="shortcut icon" href="/assets/happybass.png">
+	</head>
+	<head>
+
+	<body>
+		<div id="container">
+			<header>
+				<h1><a href="/">Michael Enger</a></h1>
+				<nav>
+					<ul>
+						<li><a href="/">Home</a></li>
+						<li><a href="/blog">Blog</a></li>
+						<li><a href="/code">Code</a></li>
+						<li><a href="/music">Music</a></li>
+					</ul>
+				</nav>
+			</header>
+			<article>
+				<time datetime="2023-11-08">2023-11-08</time>
+
+				<h1>Implementing Search for a Pure Frontend Application</h1>
+
+				<p>As I have <a href="/blog/json-datastore">discussed before</a> I recently built a video streaming website which has no backend and uses a static JSON object as its datastore. I wanted to add search to this website as it contains thousands of videos and finding the right video without searching would be cumbersome. Considering how the site has no backend there is no way to plug into a search engine so I would have to build one myself.</p>
+<p>A simple implementation would perhaps be to iterate through all the videos and check if the titles contained the search query. However this screamed inefficiency to me and is reminiscent of running a <code>WHERE LIKE '%text%'</code> on an SQL server. So I considered how search engines tend to work and settled on the idea that what we needed was a search index.</p>
+<p>The concept is quite simple: we go through all the videos and extract out every word in the titles, putting them in a list where each word had the IDs of the videos where they appeared:</p>
+<p><img src="/assets/blog/search-index-words.png" alt="A diagram a list of titles in one box with an arrow to another box that contains a list of the words which appear in those titles."></p>
+<p>Now instead of comparing the search query against the titles themselves, we would check it against this word list. It also allowed us to preemptively format all the text in the titles, converting them to lowercase and removing any superfluous characters we may not want. We also did that to the search query itself, splitting it into separate words and formatting them so that we would be comparing similarly formatted text.</p>
+<p><img src="/assets/blog/search-index-word-format.png" alt="A diagram showing the words in the title don't worry just explode converted to words by making them lowercase and removing all punctuation marks."></p>
+<p>The search engine still had to iterate through each word, but the list of words was smaller than the list of videos and we didn't have to format the text in the title every time we compared. The resulting algorithm was quite small:</p>
+<pre><code class="language-typescript">const searchWords = splitAndFormat(searchQuery)
+
+const videos = new Set()
+for (const searchWord of searchWords) {
+	for (const word of videoIndex) {
+		if (word.search(searchWord) !== 1) {
+			videoIndex[word].forEach(videoId =&gt; videos.add(videoId))
+		}
+	}
+}
+</code></pre>
+<p>This was the first version of the search and it actually worked quite well! Pre-calculating the index didn't take enough time to be noticeable and the search was fast enough that I doubt a dedicated backend could've improved the query time. However, there was one issue that I noticed immediately, which was that the search results were returning in a seemingly random order.</p>
+<p>They weren't actually random, but the search wasn't taking into consideration exact matches or whether it was matching on multiple words in a title. For example searching for &quot;horror game&quot; would return &quot;This game is bad&quot; and &quot;Horrorific Feels&quot; before &quot;Best horror game&quot;, which is a better match. To alleviate this we would have to add scoring to the search results.</p>
+<p>The algorithm was changed so that it would keep a track of which video was found and it's &quot;match score&quot;. The score would be incremented by 10 if the word matched exactly and 5 if it didn't, checking each word in the search query individually:</p>
+<p><img src="/assets/blog/search-index-score.png" alt="A diagram showing the phrase horror game with an arrow pointing to a box with a set of titles and their scores. This game is bad has 10, horrorific feels has 5, and best horror game has 20."></p>
+<p>This worked out exactly as I'd hoped and that is where the search algorithm is at the moment. It is somewhat less naïve than just checking all the titles one after another, but there's probably lots of room for improvement. If you are so inclined, the project is <a href="https://github.com/Giant-Bomb-Preservation-Project/duders-zone">available on GitHub</a> so don't be afraid to check it out and provide any feedback/suggestions you may have.</p>
+
+
+			</article>
+			<footer>
+				<a href="https://www.instagram.com/michaelenger/" aria-label="Instagram link">
+					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 217.408 217.408" xml:space="preserve" fill="currentColor" aria-hidden="true">
+						<path d="M194.078,22.682c-10.747-8.193-22.606-12.348-35.248-12.348c-15.951,0-33.181,6.808-50.126,19.754
+							C91.759,17.142,74.529,10.334,58.578,10.334c-12.642,0-24.501,4.155-35.248,12.348C7.606,34.671-0.24,49.8,0.006,67.648
+							c0.846,61.117,100.093,133.233,104.317,136.273l4.381,3.153l4.381-3.153c4.225-3.04,103.472-75.156,104.317-136.273
+							C217.648,49.8,209.802,34.671,194.078,22.682z M153.833,149.017c-18.374,18.48-36.915,33.188-45.129,39.453
+							c-8.214-6.265-26.755-20.972-45.129-39.453c-31.479-31.661-48.274-59.873-48.57-81.585c-0.178-13.013,5.521-23.749,17.421-32.822
+							c8.073-6.156,16.872-9.277,26.152-9.277c17.563,0,34.338,10.936,45.317,20.11l4.809,4.018l4.809-4.018
+							c10.979-9.174,27.754-20.11,45.317-20.11c9.28,0,18.079,3.121,26.152,9.277c11.9,9.073,17.599,19.809,17.421,32.822
+							C202.107,89.145,185.311,117.356,153.833,149.017z" />
+					</svg>
+				</a>
+			</footer>
+		</div>
+	</body>
+</html>
