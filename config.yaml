@@ -248,3 +248,22 @@ data:
         - artist: Firetop Mountain
           title: Spiders
           credits: Bass
+  music_videos:
+    - url: https://youtu.be/YtY3w0UBNaA
+      image: btb-trapped.png
+      title: Beyond the Barricade - Trapped
+    - url: https://youtu.be/V-CG7FIsq9I
+      image: yf-dislocation.png
+      title: Young Fatigue - Dislocation
+    - url: https://youtu.be/_RxE_lR-bbQ
+      image: btb-sickness.png
+      title: Beyond the Barricade - S I C K N E S S
+    - url: https://youtu.be/dcDM-zTJRdc
+      image: hafd-thetide.png
+      title: Hilltops Are For Dreamers - The Tide
+    - url: https://youtu.be/b5l_JoD_wFw
+      image: btb-wither.png
+      title: Beyond the Barricade - Wither
+    - url: https://youtu.be/uocn1tQmIe8
+      image: yf-iwant.png
+      title: Young Fatigue - I Want (Everything)

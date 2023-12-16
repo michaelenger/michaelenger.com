@@ -1,5 +1,22 @@
-<section id="music">
-	<h2>Music</h2>
+<section id="music-videos">
+	<h2>Music Videos</h2>
+
+	<p>A small selection of the music videos I'm featured in.</p>
+
+	<ul class="video-list">
+		{{# data.music_videos }}
+		<li>
+			<a href="{{ url }}">
+				<img src="/assets/music-videos/{{ image }}" title="{{ title }}">
+			</a>
+		</li>
+		{{/ data.music_videos }}
+	</ul>
+</section>
+
+
+<section id="credits">
+	<h2>Credits</h2>
 
 	<p>I've been involved in a bunch of bands and contributed to several different projects over the years, which you can see below. Note that I am only documenting my own contribution and have shared credits on all of the songs. They are all available on your streaming platform of choice.</p>
 
