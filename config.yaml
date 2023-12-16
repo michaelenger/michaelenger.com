@@ -38,7 +38,6 @@ data:
       description: Fronter is a company which provides a platform for schools and universities, which includes lesson plans, assignment hand-in, and social features. I was on a small team which was developing a lesson planner in Node.js using ElasticSearch as a data store, all hosted on scalable AWS infrastructure.
       tech:
         JavaScript: true
-        ElasticSearch: true
     - title: Web Developer
       employer: Nodes Agency
       date: Apr 2012 – Jun 2013
