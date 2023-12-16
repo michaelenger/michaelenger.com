@@ -2,6 +2,7 @@
 	--border-radius: 0.25em;
 	--color-dim: #7f7f7f;
 	--color-highlight: #b591dd;
+	--color-text: #c3c3c3;
 }
 
 ::selection {
@@ -40,7 +41,15 @@ article h2 {
 	color: inherit;
 	font-size: 18pt;
 	line-height: 1em;
-	margin: 0.5em 0;
+	margin: 1.5em 0 1em;
+}
+
+article h3,
+article h4,
+article h5,
+article h6,
+article p {
+	margin: 1em 0;
 }
 
 article img {
@@ -91,7 +100,7 @@ header {
 html {
 	background: linear-gradient(#0f172a, #162342) #0f172a;
 	background-attachment: fixed;
-	color: #c3c3c3;
+	color: var(--color-text);
 }
 
 img {
@@ -301,6 +310,29 @@ time {
 	margin-right: 0.5em;
 }
 
+.video-list {
+	display: grid;
+	gap: 1em;
+	grid-template-columns: repeat(3, 1fr);
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.video-list a {
+	display: block;
+}
+
+.video-list a img {
+	border: 2px solid transparent;
+	display: block;
+	margin: -2px;
+}
+
+.video-list a:hover img {
+	border-color: var(--color-text);
+}
+
 @media only screen and (max-width: 1200px) {
 	article img,
 	pre {
@@ -333,5 +365,10 @@ time {
 	.song-list h4,
 	.song-list p {
 		display: block;
+	}
+
+	.video-list {
+		gap: 0.5em;
+		grid-template-columns: repeat(2, 1fr);
 	}
 }
