@@ -1,6 +1,6 @@
 ---
 title: 2023 In Review
-description: I went to a lot of concerts in 2023, so here's some of the best new artists I discovered.
+description: I went to a lot of concerts in 2023 and here are some of the new artists I discovered.
 date: 2024-01-07
 ---
 
