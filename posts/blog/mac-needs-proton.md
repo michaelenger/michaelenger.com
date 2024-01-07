@@ -1,5 +1,6 @@
 ---
 title: The Mac Needs Proton
+description: As a frustrated "Mac Gamer" I desperately wish Apple would just concede the fight and work with Steam to make Windows games work better on macOS.
 date: 2023-12-16
 ---
 

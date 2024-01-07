@@ -1,5 +1,6 @@
 ---
 title: "Brage 2.0: Redesigning My Static Site Generator"
+description: I've updated my home-grown static site generator to support blog posts!
 date: 2023-08-10
 ---
 

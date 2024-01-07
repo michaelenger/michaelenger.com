@@ -1,5 +1,6 @@
 ---
 title: Implementing Search for a Pure Frontend Application
+description: If you're running a web app that has no backend and all the data is stored locally, you may be able to use this technique to implement search on the data.
 date: 2023-11-08
 ---
 As I have [discussed before](/blog/json-datastore) I recently built a video streaming website which has no backend and uses a static JSON object as its datastore. I wanted to add search to this website as it contains thousands of videos and finding the right video without searching would be cumbersome. Considering how the site has no backend there is no way to plug into a search engine so I would have to build one myself.

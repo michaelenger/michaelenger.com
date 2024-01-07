@@ -1,5 +1,6 @@
 ---
 title: Using JSON as a Data Store for a TypeScript Application
+description: I build a web app which has no backend and opted for storing all the data as JSON files.
 date: 2023-08-28
 ---
 

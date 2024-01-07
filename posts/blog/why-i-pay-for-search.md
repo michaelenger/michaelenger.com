@@ -1,5 +1,6 @@
 ---
 title: Why I Pay For Search
+description: From a desire to avoid being tracked in everything I do, I am willing to pay to search the Internet.
 date: 2023-09-10
 ---
 
