@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Michael Enger</title>
+    <link>https://michaelenger.com</link>
+    <description>I am a professional. This is my website.</description>
+    <managingEditor> (Michael Enger)</managingEditor>
+    <pubDate>Wed, 09 Aug 2023 00:00:00 +0000</pubDate>
+    <lastBuildDate>Sun, 07 Jan 2024 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://michaelenger.com/assets/happybass.png</url>
+      <title>Michael Enger</title>
+      <link>https://michaelenger.com</link>
+    </image>
+    <item>
+      <title>2023 In Review</title>
+      <link>https://michaelenger.com/blog/2023-in-review</link>
+      <description>I went to a lot of concerts in 2023 and here are some of the new artists I discovered.</description>
+      <author>Michael Enger</author>
+      <pubDate>Sun, 07 Jan 2024 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>The Mac Needs Proton</title>
+      <link>https://michaelenger.com/blog/mac-needs-proton</link>
+      <description>As a frustrated &#34;Mac Gamer&#34; I desperately wish Apple would just concede the fight and work with Steam to make Windows games work better on macOS.</description>
+      <author>Michael Enger</author>
+      <pubDate>Sat, 16 Dec 2023 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Implementing Search for a Pure Frontend Application</title>
+      <link>https://michaelenger.com/blog/frontend-search-engine</link>
+      <description>If you&#39;re running a web app that has no backend and all the data is stored locally, you may be able to use this technique to implement search on the data.</description>
+      <author>Michael Enger</author>
+      <pubDate>Wed, 08 Nov 2023 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Why I Pay For Search</title>
+      <link>https://michaelenger.com/blog/why-i-pay-for-search</link>
+      <description>From a desire to avoid being tracked in everything I do, I am willing to pay to search the Internet.</description>
+      <author>Michael Enger</author>
+      <pubDate>Sun, 10 Sep 2023 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Using JSON as a Data Store for a TypeScript Application</title>
+      <link>https://michaelenger.com/blog/json-datastore</link>
+      <description>I build a web app which has no backend and opted for storing all the data as JSON files.</description>
+      <author>Michael Enger</author>
+      <pubDate>Mon, 28 Aug 2023 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Brage 2.0: Redesigning My Static Site Generator</title>
+      <link>https://michaelenger.com/blog/brage-2-point-0</link>
+      <description>I&#39;ve updated my home-grown static site generator to support blog posts!</description>
+      <author>Michael Enger</author>
+      <pubDate>Thu, 10 Aug 2023 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Hello, world!</title>
+      <link>https://michaelenger.com/blog/hello-world</link>
+      <description>Can you see this?</description>
+      <author>Michael Enger</author>
+      <pubDate>Wed, 09 Aug 2023 00:00:00 +0000</pubDate>
+    </item>
+  </channel>
+</rss>
