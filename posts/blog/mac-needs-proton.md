@@ -94,4 +94,4 @@ But of course they won't.
 
 I am completely aware that the reason Apple would rather incentivise developers to join them in their exclusive club rather than go to where people are is because there's no money in it. They aren't actually interested in making macOS a good platform for gaming, they want people to spend more money in the Mac App Store. Adding improvements to Wine and partnering with Valve to make Proton work as seamlessly on macOS as it does on Linux wouldn't let Apple see it's 30% cut. Making the macOS platform attractive to a wide range of users who will then buy their pricey hardware isn't as lucrative as getting their existing Mac owners to spend more on apps. People just [don't buy computers like they used to](https://gagadget.com/en/business/233842-global-pc-market-collapses-29-in-early-2023-apple-fared-worst/) so now it's all about getting people to pay monthly for add-on services and buying microtransactions ([which they do](https://www.techspot.com/news/48412-study-91-of-mobile-game-revenue-comes-from-microtransactions.html)).
 
-Gaming on Mac is dead and that makes me sad.
+Gaming on Mac is languishing and that makes me sad.
