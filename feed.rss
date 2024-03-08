@@ -5,12 +5,19 @@
     <description>I am a professional. This is my website.</description>
     <managingEditor> (Michael Enger)</managingEditor>
     <pubDate>Wed, 09 Aug 2023 00:00:00 +0000</pubDate>
-    <lastBuildDate>Sun, 07 Jan 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 08 Mar 2024 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://michaelenger.com/assets/happybass.png</url>
       <title>Michael Enger</title>
       <link>https://michaelenger.com</link>
     </image>
+    <item>
+      <title>Seeding RNG Without the Current Time</title>
+      <link>https://michaelenger.com/blog/rng-seed-no-time</link>
+      <description>When developing a game for a fantasy console that doesn&#39;t have the concept of time I needed a way to seed the Random Number Generator.</description>
+      <author>Michael Enger</author>
+      <pubDate>Fri, 08 Mar 2024 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>2023 In Review</title>
       <link>https://michaelenger.com/blog/2023-in-review</link>

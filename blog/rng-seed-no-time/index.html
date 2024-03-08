@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width">
+        <meta name="description" content="When developing a game for a fantasy console that doesn&#39;t have the concept of time I needed a way to seed the Random Number Generator.">
+        <meta name="theme-color" content="#0f172a" />
+
+        <meta property="og:title" content="Seeding RNG Without the Current Time">
+        <meta property="og:description" content="When developing a game for a fantasy console that doesn&#39;t have the concept of time I needed a way to seed the Random Number Generator.">
+        <meta property="og:url" content="https://michaelenger.com/blog/rng-seed-no-time">
+        <meta property="og:image" content="https://michaelenger.com/assets/happybass.png">
+        <meta property="og:image:secure_url" content="https://michaelenger.com/assets/happybass.png">
+        <meta property="og:image:height" content="800">
+        <meta property="og:image:type" content="image/png">
+        <meta property="og:image:width" content="800">
+        <meta property="og:locale" content="en_GB">
+        <meta property="og:site_name" content="Michael Enger">
+        <meta property="og:type" content="article">
+
+        <meta name="twitter:title" content="Michael Enger">
+        <meta name="twitter:description" content="When developing a game for a fantasy console that doesn&#39;t have the concept of time I needed a way to seed the Random Number Generator.">
+        <meta name="twitter:image" content="https://michaelenger.com/assets/happybass.png">
+        <meta name="twitter:card" content="summary">
+
+        <title>Seeding RNG Without the Current Time - Michael Enger</title>
+
+        <link rel="stylesheet" type="text/css" href="/assets/style.css">
+        <link rel="shortcut icon" href="/assets/winxp.png">
+        <link rel="alternate" type="application/rss+xml" title="Michael Enger" href="https://michaelenger.com/feed.rss">
+	</head>
+	<head>
+
+	<body>
+		<div id="container">
+			<header>
+				<h1><a href="/">Michael Enger</a></h1>
+				<nav>
+					<ul>
+						<li><a href="/">Home</a></li>
+						<li><a href="/blog">Blog</a></li>
+						<li><a href="/code">Code</a></li>
+						<li><a href="/music">Music</a></li>
+					</ul>
+				</nav>
+			</header>
+			<article>
+				<time datetime="2024-03-08">2024-03-08</time>
+
+				<h1>Seeding RNG Without the Current Time</h1>
+
+				<p>A while ago I was working on a little game for the <a href="https://wasm4.org/">WASM-4</a> fantasy console. It's a super limited platform with few colours and even fewers buttons, but it supports Rust and it felt like a good way to dip into game dev (which I do now and then) without having to worry about fancy graphics or super-involved gameplay. The game is an implementation of the one-page RPG <a href="https://twitter.com/deathbybadger/status/1567425842526945280">Potato by Oliver Darkshire</a> and I called it <a href="https://michaelenger.com/poteto/">ポテート</a> (potēto).</p>
+<p><img src="/assets/blog/poteto-game.png" alt="Screenshot of the potēto game showing 3 partially filled tracks, destiny, potatoes and orcs, as well as prompts to roll and hurl."></p>
+<p>The point of the game is to gather up potatoes while avoiding orcs and an encroaching destiny that threatens to take you away from your potato farm. You roll the dice using the <code>X</code> key and various events happen that advance one of the tracks. You can hurl potatoes over the fence to distract orcs using the <code>Z</code> key and you can reset the game at any point using <code>R</code>. It's a hard game to win, but it <em>is</em> possible.</p>
+<p>Being an RPG (role-playing game) the game relies a lot on RNG (random number generation). RNG requires an initial seed value to function properly. If you don't seed your RNG before you use it you're going to end up with getting the same results every time. Usually I would get the current system time and use that as a seed, a tried and trusted technique that I learned ...somewhere. But the WASM-4 fantasy console has no way to get the current time of the system it's running in, so I had to improvise.</p>
+<p>Before I describe what I did I must explain that this is an issue that is older than I am, and has been solved faster and better by the gurus whose shoulders I stand on. However, I didn't want to just look up an existing algorithm as this was a project done just for fun. So if my solutions seems rudimentary or pointlessly bad please excuse my ignorance. It was fun to make, and sometimes that's enough.</p>
+<p>For the actual random number generation I used an existing RNG library called <a href="https://crates.io/crates/fastrand">fastrand</a>, as I wasn't interested in making my own randomisation algorithm. Then to get a random seed to give it I took advantage of the fact that WASM-4 uses a standard update loop. I would increment a tick counter every time the loop repeated, and when a new random value was needed I would seed the fastrand <code>Rng</code> instance using this tick value. I also included the previous result along with the tick, to add another element of randomisation.</p>
+<pre><code class="language-rust">use fastrand;
+
+let rng = fastrand::Rng::with_seed(24601);
+let mut seed_counter: u64 = 0;
+let mut previous_result: u64 = 0;
+
+// On every update loop
+seed_counter += 1;
+
+// When getting a new random value given a range
+rng.seed(seed_counter + previous_result);
+let result = rng.u64(1..100);
+previous_result = result;
+</code></pre>
+<p>I was partially inspired by what I <em>think</em> was done in some NES games. I may be misremembering, but I vaguely recall hearing in a video essay that a game would start a counter when it first booted up and then use that counter to seed the RNG when the player first pressed the Start button. That way the player's action would be the randomising element.</p>
+<p>This seemed like such a clever idea and I tried to replicate it somewhat with my solution. Random numbers are only requested when the player rolls the dice, so the amount of ticks would vary depending on how quickly the player pressed the roll button. It may be overkill to seed the RNG every time a new value is requested, but it saved me from having to put in any logic for starting and stopping the tick counter. The game is very simple and even has no animations in it, so it's not like I was eating up a lot of processing power keeping the tick counter going or seeing the RNG.</p>
+<p>If you want to see the solution for yourself it's <a href="https://github.com/michaelenger/poteto/blob/main/src/rng.rs">available on GitHub</a>. It's very simple, but it worked out well for me and I enjoyed working within the limitations of the WASM-4 fantasy console. Making the game also showed me that the rules of the RPG are somewhat flawed and is too dependent on dice rolls, so the player has no real agency as to whether or not they win. Oh well 🤷</p>
+
+
+			</article>
+			<footer>
+				<a href="https://www.instagram.com/michaelenger/" aria-label="Instagram link">
+					<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 217.408 217.408" xml:space="preserve" fill="currentColor" aria-hidden="true">
+						<path d="M194.078,22.682c-10.747-8.193-22.606-12.348-35.248-12.348c-15.951,0-33.181,6.808-50.126,19.754
+							C91.759,17.142,74.529,10.334,58.578,10.334c-12.642,0-24.501,4.155-35.248,12.348C7.606,34.671-0.24,49.8,0.006,67.648
+							c0.846,61.117,100.093,133.233,104.317,136.273l4.381,3.153l4.381-3.153c4.225-3.04,103.472-75.156,104.317-136.273
+							C217.648,49.8,209.802,34.671,194.078,22.682z M153.833,149.017c-18.374,18.48-36.915,33.188-45.129,39.453
+							c-8.214-6.265-26.755-20.972-45.129-39.453c-31.479-31.661-48.274-59.873-48.57-81.585c-0.178-13.013,5.521-23.749,17.421-32.822
+							c8.073-6.156,16.872-9.277,26.152-9.277c17.563,0,34.338,10.936,45.317,20.11l4.809,4.018l4.809-4.018
+							c10.979-9.174,27.754-20.11,45.317-20.11c9.28,0,18.079,3.121,26.152,9.277c11.9,9.073,17.599,19.809,17.421,32.822
+							C202.107,89.145,185.311,117.356,153.833,149.017z" />
+					</svg>
+				</a>
+			</footer>
+		</div>
+	</body>
+</html>
