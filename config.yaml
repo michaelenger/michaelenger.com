@@ -84,6 +84,14 @@ data:
       tech:
         Rust: true
   music:
+    - year: 2024
+      songs:
+        - artist: Beyond The Barricade
+          title: Aokigahara
+          credits: Lyrics
+        - artist: Young Fatigue
+          title: Sold Out
+          credits: Bass
     - year: 2023
       songs:
         - artist: Beyond The Barricade
