@@ -49,7 +49,7 @@ That being said, the website is incredibly simplistic and requires that you have
 
 Note that these are all features that the aforementioned [feedi project by Facundo Olano](https://github.com/facundoolano/feedi) already supports, so if you're interested in running your own reader I would recommend you check that out instead. This project was mostly a fun programming exercise for me and just like [Brage](https://michaelenger.com/blog/brage-2-point-0/) I get a kick out of building things that are to my own benefit and fit my very specific needs.
 
-I've been running a server for it for a while now and I'm enjoying how it's such a no-pressure environment for browsing articles. It's running on a public server so you can check it out and judge my choice of feeds if you so please: [michaelenger.com/innbundet](http://michaelenger.com/innbundet)
+~~I've been running a server for it for a while now and I'm enjoying how it's such a no-pressure environment for browsing articles. It's running on a public server so you can check it out and judge my choice of feeds if you so please: [michaelenger.com/innbundet](http://michaelenger.com/innbundet)~~ **EDIT**: I've had to remove the instance of Innbundet I was running as it was getting too costly using the service I was using.
 
 _In case you're curious about the name: "innbundet" is Norwegian for "bound" as in how a book is bound._
 
