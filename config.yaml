@@ -3,6 +3,8 @@ description: I am a professional. This is my website.
 image: happybass.png
 author: Michael Enger
 root_url: https://michaelenger.com
+redirects:
+  /innbundet: http://1250497.vps.tornado.no/
 
 data:
   experience:
