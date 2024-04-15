@@ -211,12 +211,12 @@ time {
 	padding: 3em 1em;
 }
 
-#education .degree {
-	font-weight: bold;
+#credits h3 {
+	margin-top: 2em;
 }
 
-#music h3 {
-	margin-top: 2em;
+#education .degree {
+	font-weight: bold;
 }
 
 #posts li {
