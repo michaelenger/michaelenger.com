@@ -68,19 +68,24 @@ data:
       location: Oslo, Norway
       year: 2009
   projects:
+    - title: Innbundet
+      link: https://github.com/michaelenger/Innbundet
+      description: Personal RSS reader web app.
+      tech:
+        Go: true
     - title: Galleri
       link: https://github.com/michaelenger/Galleri
       description: Basic image gallery for macOS, with support for animated GIFs.
       tech:
-        Swift: asd
+        Swift: true
     - title: brage
       link: https://github.com/michaelenger/brage
-      description: Command-line tool for generating static websites based on Markdown and Mustache templates. Was used to build this website and several others that I manage.
+      description: Command-line tool for generating static websites based on Markdown and Mustache templates. Was used to build this website.
       tech:
         Go: true
     - title: gifff
       link: https://github.com/michaelenger/gifff
-      description: Tiny command-line tool used for fetching gif images based on a search term. Features wrapping the resulting URL in some Markdown, and keeping a cache of already-seen images.
+      description: Tiny command-line tool used for fetching gif images based on a search term.
       tech:
         Rust: true
   music:
