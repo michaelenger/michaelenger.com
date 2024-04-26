@@ -248,22 +248,6 @@ time {
 	padding: 0;
 }
 
-.portfolio-list a {
-	text-decoration: none;
-}
-
-.portfolio-list a span {
-	text-decoration: underline;
-}
-
-.portfolio-list a svg {
-	height: 0.6em;
-	margin-left: -0.4em;
-	position: relative;
-	top: 0;
-	width: 0.6em;
-}
-
 .portfolio-list li {
 	margin-bottom: 1.5em;
 }
