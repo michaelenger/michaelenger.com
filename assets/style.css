@@ -260,6 +260,26 @@ time {
 	margin: 0.5em 0;
 }
 
+.project-list {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	column-gap: 1em;
+	row-gap: 1em;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.project-list > li {
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: var(--border-radius);
+	padding: 1em;
+}
+
+.project-list p {
+	margin: 0.5em 0;
+}
+
 .song-list {
 	list-style: none;
 	margin: 0;
@@ -355,6 +375,20 @@ time {
 
 	#experience .separator {
 		display: none;
+	}
+
+	.project-list {
+		display: block;
+	}
+
+	.project-list > li {
+		border: none;
+		margin-bottom: 1.5em;
+		padding: 0;
+	}
+
+	.project-list > li li:last-child {
+		margin-bottom: 0;
 	}
 
 	.song-list h4,
