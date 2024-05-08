@@ -4,6 +4,10 @@ description: From a desire to avoid being tracked in everything I do, I am willi
 date: 2023-09-10
 ---
 
+**2024-05-08 UPDATE:** Unfortunately, since writing this article it's become clear that the CEO of Kagi is a bit of [a condescending dickhead who wants to push everyone towards using AI](https://d-shoot.net/kagi.html). So I'm on the lookout for an alternative, but I can't find a search engine which is willing to take my money rather than showing me ads so if you know of one [please do reach out](mailto:hello@michaelenger.com).
+
+**--**
+
 Search is one of those foundations of the modern Internet. The Internet is a wild and wonderful place with all manner of strange and useful information to be found, but without the means to sift through it all that abundance is wasted.
 
 For a long time Google was the de-facto standard for searching the Internet. When it was launched it offered a simplistic and effective way to search without all the cruft that other search engines at the time were known for. However, in recent years its quality and usability has decreased, at least in my experience. With Google's main business model being user tracking and serving ads, it was just a matter of time before its monetary motivations would result in a degraded user experience. I am someone who goes out of their way to avoid being tracked as much as possible and it may be that my experience with Google's search results being so bad is because it doesn't know enough about me to give me helpful results. With Google being the biggest search engine in the world it also faces a lot of pressure trying to combat people gaming the system to improve their placement in the search results. All this coupled with its motivation to steer people towards paid placements has resulted in a search experience that just flat out sucks. But this is Google.. what alternative do we have?
