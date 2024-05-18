@@ -1,3 +1,3 @@
-image: debian/debian:stable-slim
+image: debian:stable-slim
 command: ./bin/brage build
 public: build
