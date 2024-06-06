@@ -156,6 +156,7 @@ p > code {
 pre {
 	background: #233257;
 	border-radius: var(--border-radius);
+	box-sizing: border-box;
 	font-family: 'Nimbus Mono PS', 'Courier New', monospace;
 	font-size: 85%;
 	margin: 0 -2.5%;
