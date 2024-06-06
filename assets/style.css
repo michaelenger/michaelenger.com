@@ -57,9 +57,9 @@ blockquote {
 }
 
 body {
-	font-family: 'PT Mono', Georgia, serif;
+	font-family: Rockwell, 'Rockwell Nova', 'Roboto Slab', 'DejaVu Serif', 'Sitka Small', serif;
 	font-size: 13pt;
-	font-weight: lighter;
+	font-weight: normal;
 	margin: 0;
 }
 
@@ -146,6 +146,7 @@ ol, p, ul {
 p > code {
 	background: #233257;
 	border-radius: var(--border-radius);
+	font-family: 'Nimbus Mono PS', 'Courier New', monospace;
 	font-size: 85%;
 	margin: 0;
 	padding: .2em .4em;
@@ -155,6 +156,8 @@ p > code {
 pre {
 	background: #233257;
 	border-radius: var(--border-radius);
+	box-sizing: border-box;
+	font-family: 'Nimbus Mono PS', 'Courier New', monospace;
 	font-size: 85%;
 	margin: 0 -2.5%;
 	padding: 2.5%;
