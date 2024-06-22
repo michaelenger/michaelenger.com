@@ -1,3 +1,6 @@
 image: debian:stable-slim
 command: ./bin/brage build
 public: build
+domains:
+  - michaelenger.com
+  - www.michaelenger.com
