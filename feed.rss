@@ -5,19 +5,12 @@
     <description>I am a professional. This is my website.</description>
     <managingEditor> (Michael Enger)</managingEditor>
     <pubDate>Wed, 09 Aug 2023 00:00:00 +0000</pubDate>
-    <lastBuildDate>Sun, 24 Mar 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 08 Mar 2024 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://michaelenger.com/assets/happybass.png</url>
       <title>Michael Enger</title>
       <link>https://michaelenger.com</link>
     </image>
-    <item>
-      <title>Innbundet: Replacing Reddit with RSS</title>
-      <link>https://michaelenger.com/blog/innbundet-rss</link>
-      <description>Reddit went and did an enshittification and so I built my own RSS reader. Like you do.</description>
-      <author>Michael Enger</author>
-      <pubDate>Sun, 24 Mar 2024 00:00:00 +0000</pubDate>
-    </item>
     <item>
       <title>Seeding RNG Without the Current Time</title>
       <link>https://michaelenger.com/blog/rng-seed-no-time</link>
