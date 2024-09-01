@@ -1,8 +1,10 @@
 :root {
 	--border-radius: 0.25em;
+	--color-aside: #233257;
 	--color-dim: #7f7f7f;
 	--color-highlight: #b591dd;
-	--color-text: #c3c3c3;
+	--color-text: #dadada;
+	--color-text-aside: #c3c3c3;
 }
 
 ::selection {
@@ -45,9 +47,28 @@ article p {
 }
 
 article img {
-	margin: 0 -2.5%;
-	max-width: 105%;
-	width: 105%;
+	margin: 0 -1%;
+	max-width: 102%;
+	width: 102%;
+}
+
+article aside {
+	background: var(--color-aside);
+	border-radius: var(--border-radius);
+	box-sizing: border-box;
+	color: var(--color-text-aside);
+	font-size: 11pt;
+	margin: 0 -1%;
+	padding: 2%;
+	width: 102%;
+}
+
+article aside > p:first-child {
+	margin-top: 0;
+}
+
+article aside > p:last-child {
+	margin-bottom: 0;
 }
 
 blockquote {
@@ -144,8 +165,9 @@ ol, p, ul {
 }
 
 p > code {
-	background: #233257;
+	background: var(--color-aside);
 	border-radius: var(--border-radius);
+	color: var(--color-text-aside);
 	font-family: 'Nimbus Mono PS', 'Courier New', monospace;
 	font-size: 85%;
 	margin: 0;
@@ -154,15 +176,16 @@ p > code {
 }
 
 pre {
-	background: #233257;
+	background: var(--color-aside);
 	border-radius: var(--border-radius);
 	box-sizing: border-box;
+	color: var(--color-text-aside);
 	font-family: 'Nimbus Mono PS', 'Courier New', monospace;
 	font-size: 85%;
-	margin: 0 -2.5%;
-	padding: 2.5%;
+	margin: 0 -1%;
+	padding: 2%;
 	white-space: break-spaces;
-	width: 105%;
+	width: 102%;
 }
 
 section {
@@ -358,6 +381,7 @@ time {
 }
 
 @media only screen and (max-width: 1200px) {
+	article aside,
 	article img,
 	pre {
 		margin: 0%;
