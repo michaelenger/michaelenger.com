@@ -1,8 +1,10 @@
 :root {
 	--border-radius: 0.25em;
+	--color-aside: #233257;
 	--color-dim: #7f7f7f;
 	--color-highlight: #b591dd;
-	--color-text: #c3c3c3;
+	--color-text: #dadada;
+	--color-text-aside: #c3c3c3;
 }
 
 ::selection {
@@ -44,10 +46,49 @@ article p {
 	margin: 1em 0;
 }
 
-article img {
-	margin: 0 -2.5%;
-	max-width: 105%;
-	width: 105%;
+article p img {
+	margin: 0 -1%;
+	max-width: 102%;
+	width: 102%;
+}
+
+article aside {
+	background: var(--color-aside);
+	border-radius: var(--border-radius);
+	box-sizing: border-box;
+	color: var(--color-text-aside);
+	font-size: 11pt;
+	margin: 0 -1%;
+	padding: 2% 2% 1.5% 2%;
+	width: 102%;
+}
+
+article aside > p:first-child {
+	margin-top: 0;
+}
+
+article aside > p:last-child {
+	margin-bottom: 0;
+}
+
+article figure {
+	color: var(--color-text-aside);
+	font-size: 10pt;
+	font-style: italic;
+	margin: 0 -1%;
+	max-width: 102%;
+	position: relative;
+	width: 102%;
+}
+
+article figure figcaption {
+	display: block;
+	margin-top: 0.5em;
+}
+
+article figure img {
+	display: block;
+	width: 100%;
 }
 
 blockquote {
@@ -144,8 +185,9 @@ ol, p, ul {
 }
 
 p > code {
-	background: #233257;
+	background: var(--color-aside);
 	border-radius: var(--border-radius);
+	color: var(--color-text-aside);
 	font-family: 'Nimbus Mono PS', 'Courier New', monospace;
 	font-size: 85%;
 	margin: 0;
@@ -154,15 +196,16 @@ p > code {
 }
 
 pre {
-	background: #233257;
+	background: var(--color-aside);
 	border-radius: var(--border-radius);
 	box-sizing: border-box;
+	color: var(--color-text-aside);
 	font-family: 'Nimbus Mono PS', 'Courier New', monospace;
 	font-size: 85%;
-	margin: 0 -2.5%;
-	padding: 2.5%;
+	margin: 0 -1%;
+	padding: 2%;
 	white-space: break-spaces;
-	width: 105%;
+	width: 102%;
 }
 
 section {
@@ -358,7 +401,9 @@ time {
 }
 
 @media only screen and (max-width: 1200px) {
-	article img,
+	article aside,
+	article figure,
+	article p img,
 	pre {
 		margin: 0%;
 		max-width: 100%;
