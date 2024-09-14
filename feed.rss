@@ -15,6 +15,141 @@
       <title>raylib vs. Godot: A Highly Subjective Comparison</title>
       <link>https://michaelenger.com/blog/game-engine-research</link>
       <description>The year is 2024 and I&#39;m itching to do some game development. With the myriad of choices available to me, which one actually appeals the most?</description>
+      <content:encoded><![CDATA[<aside>
+<p>I must up front apologise for the length of this article. It's an indulgent bit of research with a conclusion that serves no one but myself. Writing the article was intended to motivate me to actually finish this fools errand and to collect my thoughts on a question that had been badgering me for a while. This took far longer than anticipated, and if you have an equally burning question within you I wholeheartedly support figuring it out in the most convoluted and lengthy way possible.</p>
+<p><em>For a succinct <abbr title="Too Long; Didn't Read">TL;DR</abbr>, just read the last sentence.</em></p>
+</aside>
+<p>So I want to make a game.</p>
+<p>I got into coding because I wanted to make games, a motivation that's not uncommon among my programming peers. I may never have gotten a job in the games industry, but I have often dabbled in game development over the years, from contributing to <a href="https://love2d.org/">LÖVE</a> to taking a master's degree in Computer Games Technology. The dream of my younger self to have a career in games may be dead, but the itch to create lives on.</p>
+<figure>
+<img src="/assets/blog/gameengine-ninjavssamurai.png" alt="Screenshot of a 7x7 maze with a green ninja, three samurai opponents with vision cones, and a pair of scrolls. The characters are stylised circles and the art style is very beige and textured to look like parchment.">
+<figcaption>Years ago I made a puzzle game wherein you were a ninja trying to avoid patrolling samurai. It has the highly original title Ninja vs. Samurai.</figcaption>
+</figure>
+<p>The indie game development scene has changed a lot since I first wrote a line of code and cemented my future career as a Certified Computer Person™. Several years ago, back when Unity was growing in popularity, I remember remarking to a friend that the era of frameworks like LÖVE was over. If someone came to me asking how to get into game development I would point them towards Unity and I couldn't see a reason why anyone would do otherwise. That conversation was about a decade ago and despite Unity having completely consumed the indie game development space, it hasn't exactly spelled the death of simpler libraries and frameworks. I've also found that my opinion on the matter has been thoroughly changed. If I was asked the same question about &quot;where to begin&quot; now it would be harder to answer, not just for a beginner but also for myself.</p>
+<p>The year is 2024, I've been programming for over two decades, and I want to do some game development. Where do I begin?</p>
+<h2>Finding the Fun</h2>
+<p>I can suffer from choice paralysis when it comes to the tools I use. Programming is such a wide field with seemingly endless options so I face the question of where to begin with absolute bewilderment, if not outright dread. I can't remember how many editors I've tried or libraries I've played with, and in my folder of unfinished side-projects I count eight different programming languages. With a field of unrealised ideas laying in my wake like discarded toys I am loathe to begin yet another project whose future is equally uncertain.</p>
+<p>What I'm trying to discover with this article is to find the fun. I genuinely enjoy programming and I am itching to have a project to dig my teeth into. Something challenging, with a bit of purpose behind it, but also without any deadline or expectation other than existing for its own sake. I want to make a game because <em>making games is fun</em>. It's just difficult to push myself over the threshold of inactivity without that disconcerting voice in the back of my head telling me that I'm making all the wrong choices. Any choice of engine will come with caveats and compromises, and I worry that once things get difficult I will have wandering eyes seeking seemingly greener pastures. It's frustrating how this doubt does little but distract me from the act of working on the game itself.</p>
+<p>So, rather than sit here and watch the ashes of my ambition be scattered to the winds of time I'm going to try something radical. Well, perhaps not radical, but at least I'm going to do <em>something</em> about this incessant indecisiveness. I'm going to build a small proof-of-concept game demo in ~~~several~~~ two different game engines and figure out which one I like best.</p>
+<aside>
+<p>I originally had a list of four different engines/libraries I wanted to test, but I had immediate negative experiences with two of them which resulted in cutting the list in half. This had the fortunate effect of focusing the article on comparing a fully-featured game engine to a simple library and it didn't hurt that it reduced the workload dramatically.</p>
+</aside>
+<p>As the title of this article has already given it away, I will build no suspense as to what I'll be testing: <a href="https://godotengine.org/">Godot</a> and <a href="https://www.raylib.com/">raylib</a>. My decision was based mostly of the vibe I had been getting from the two projects and their place in the discourse surrounding indie games development. They both purport to be the cool alternative to the big guys, wearing a dirty pair of Converse and a backwards cap while the likes of Unreal and Unity are in their stuffy suits. And as an owner of a dirty pair of Converse I can definitely see the appeal.</p>
+<h3>Philosophical Differences</h3>
+<p>Another important aspect of why I chose the options that I did was how dramatically different they were. Godot is a complete engine with its own editor and scripting language whereas raylib is a <a href="https://wikipedia.org/wiki/Header-only">header-only</a> library that provides you with a bunch of utility functions and then leaves the rest up to you. One could think that if I wanted to focus on actually building a game, I would reach for the full engine first, but a part of the reason I've had a hard time making a decision is that I don't know if I'll actually enjoy working in an integrated editor.</p>
+<p>I'm one of those &quot;traditional&quot; sort of game developers who got their start building games around a <a href="https://gameprogrammingpatterns.com/game-loop.html">main game loop</a>. This is essentially a single loop that runs forever and wherein you write your game logic and rendering chain. You can get fancy with it and split the work into multiple threads, but the philosophy remains the same.</p>
+<pre><code class="language-cpp">while (true) {
+  // Process input
+  readKeyboardState();
+  readMouseState();
+
+  // Update game state
+  float dt = timeSinceLastLoop();
+  for (Entity *entity : entities) {
+    entity-&gt;update(dt);
+  }
+
+  // Render
+  glClear(GL_COLOR_BUFFER_BIT);
+  // ...
+  glFlush();
+}
+</code></pre>
+<p>This way of building games has never gone away, despite what I perceived as a tidal shift all those years ago. There is even a <a href="https://handmade.network/">thriving community</a> that has sprung up around championing the idea that it's more fun to build games unladed from the weight of a game engine. The indie games industry may all have gravitated towards Unity and Unreal, but the <a href="https://tlalice.itch.io/love-locked">weirdos doing weird stuff</a> are sticking to the main loop. As god intended.</p>
+<p>Seeing as my first introductions into game dev was using a main loop, I find it familiar and welcoming. Whether I will <em>actually</em> enjoy it in the long run is another matter, but figuring that out is the entire point of this whole endeavour. I may be overly romanticising the die-hard DIY approach, but I can also imagine that spending my time fiddling with a model culling algorithm is going to be more fun than trying to accomplish the same effect using an editor's GUI menus.</p>
+<h2>The Game</h2>
+<p>To be able to compare the different ways of working I need a project to work on. So here I introduce my incredibly ambitious dream project that has no hope of ever being completed:</p>
+<p>I want to make a 3D point-and-click adventure game!</p>
+<p>Why? Well, I genuinely love point-and-click adventure games. The genre—despite being considered <a href="https://www.gamedeveloper.com/design/the-fall-of-the-point-and-click-adventure-game">dead for decades</a>—is thriving with a <a href="https://adventuregamers.com/newreleases">constant stream of indie releases</a>, and I am happy that we live in a world where niche game genres can survive with the support of their true fans.</p>
+<aside>
+<p>If you're into the classic 2D pixel art style of point-and-click adventure I highly recommend <a href="http://www.kathyraingame.com/"><em>Kathy Rain</em></a> and <a href="http://www.whispersofamachine.com/"><em>Whispers of a Machine</em></a>, both from Swedish developer Clifftop Games.</p>
+</aside>
+<p>Thinking pragmatically, this style of game is also one that would be a lot simpler to implement than trying for anything action-oriented. It wouldn't require weeks of tweaking the physics to <em>feel</em> just right, nor will it feel empty without multiplayer, or require complex AI or something like that. Also, I have a story that's been burning a hole in my head and I think the best way to tell it is via a style of interactive fiction I adore. Making it 3D is also partially as a challenge to myself, but also as an homage to classic games like <em>Still Life</em> and <em>Grim Fandango</em>.</p>
+<figure>
+<img src="/assets/blog/gameengine-stillife.jpg" alt="Screenshot from the game Still Life featuring the protagonist visiting a morgue where a tattooed woman is laying on the slab while the physician is inspecting some medical device.">
+<figcaption>It may just be nostalgia, but to me there is something so evocative about the elaborate pre-rendered backgrounds from this era of gaming.</figcaption>
+</figure>
+<p>Unlike those classics I will forego the static pre-rendered background and go full 3D. Computers are nowadays by far powerful enough to render the necessarily complex scenes you'd need for an adventure game.</p>
+<p>So what would such a game contain?</p>
+<ul>
+<li>A character you control using the mouse (or tank controls if you're a brave soul)</li>
+<li>Varying locations to move between</li>
+<li>Objects to interact with</li>
+<li>Characters to speak to</li>
+<li>Items to pick up and combine with other things to solve puzzles</li>
+<li><a href="https://en.wikipedia.org/wiki/The_Goat_Puzzle">Goats?</a></li>
+</ul>
+<p>In terms of gameplay features it's not really that big of a list, but even these limited requirements betray the hidden complexity of building a system to support them all. Also a fully-fledged game product includes a myriad of hidden features that come as standard: the game needs to be aware of its state (solved puzzles, characters met, etc.), would need to save and load that state, support options to handle different hardware or user preferences, have sound and music, etc. There are dozens of other small details that I will remember only once I realise they're missing.</p>
+<p>Despite the surface level simplicity this is a substantial undertaking and there is a high likelihood that it will never be finished or released in any capacity. Then again, this is not about making a marketable product as much as it's about giving me something fun to play with when I'm not writing <a href="https://youtu.be/YtY3w0UBNaA">terrible songs</a> or getting <a href="https://youtu.be/XMoVDG7BjCo">destroyed in the pit</a>.</p>
+<p>As much as I have a desperate drive to get started with my actual dream project, I think for the sake of not spending the better part of the next decade on this experiment I am going to simplify the requirements that my game demo needs to fulfil. My aim is to have an animated character walking around in a simple room containing some things to interact with that just pop up a text dialog. This seems like a limited enough scope to be doable in a few weekends, but also will force me to solve some actual problems and get to know the tool so that I can make an informed decision. I'm specifically trying to get a feel for the following:</p>
+<ul>
+<li>Loading models and animations</li>
+<li>Rendering the models with dynamic lighting</li>
+<li>Implementing mouse movement</li>
+<li>Changing the camera when transitioning between spaces</li>
+<li>UI/text rendering</li>
+<li>Basic audio</li>
+</ul>
+<p>I got a plan so let's get to it!</p>
+<h2>Getting to It</h2>
+<p>I've spent more weeks than I'd like to admit getting this done (I started this in June!!), but I was able to successfully make the game demo using both raylib and Godot. The actual finished products are messy and not worth showing off, but I've collected my thoughts on the different engines and have been able to come to a satisfying conclusion.</p>
+<h3>raylib</h3>
+<p><a href="https://www.raylib.com/">raylib</a> claims to be &quot;a simple and easy-to-use library to enjoy videogames programming.&quot; It was created by Ray Santamaria—whom the library is named for—and has gotten a fair bit of attention due to its ease of use and <a href="https://github.com/raysan5/raylib/blob/master/BINDINGS.md">crazy amounts of bindings</a>. It's essentially a header-only C library so it's easy to create bindings for every language under the sun. There is also <a href="https://github.com/psxdev/raylib4Dreamcast">a port for the SEGA Dreamcast</a>, which I of course absolutely love ♥</p>
+<p>I was attracted to raylib due to its popularity within the handmade games space and because I wanted to stretch my C++ muscles, fearing that they've atrophied since I last changed jobs. It also claims to provide the means to &quot;enjoy videogames programming&quot;, which is exactly the experience I am after. With raylib being as simple as it was, I skipped over my usual process of learning by completing tutorials and just started working on the game demo, referring to the documentation and <a href="https://www.raylib.com/examples.html">plethora of examples</a> as I went along.</p>
+<figure>
+<img src="/assets/blog/gameengine-raylib.png" alt="Screenshot of the finished demo built in raylib. Behind the game demo there is the main Sublime Text window showing some C++ code.">
+<figcaption>raylib had a bit of trouble with the character model I was using, but that wasn't necessarily raylib's fault. It still correctly loaded the mesh, materials, and animations from a random GLB file I found on itch.io.</figcaption>
+</figure>
+<p>Working with raylib definitely lived up to its tagline and I understood why it has such a positive reputation. The library <strong>is</strong> simple and easy-to-use and I <strong>did</strong> enjoy the programming experience. The API—detailed in the extensive <a href="https://www.raylib.com/cheatsheet/cheatsheet.html">cheatsheet</a>—feels like a comprehensive toolkit, giving you just what you need to get going and build games. You create a window using <code>InitWindow</code>, load models with <code>LoadModel</code>, and play sounds with <code>PlaySound</code>. If you have a basic understanding of games development, raylib is incredibly easy to work with and doesn't require you to get used to a complex architecture or indecipherable abstractions. I was responsible for structuring my code myself, something I did with great gusto, and raylib was just there to help me do the complex things that didn't pertain to my specific project.</p>
+<p>However, despite its ease of use, it does feel like a toolbox for experienced developers rather than somewhere a novice can get their first start. It will happily make the first circle for you, but then you have to <a href="https://knowyourmeme.com/memes/how-to-draw-an-owl">draw the rest of the fucking game</a>. Doing something as seemingly simple as adding lighting requires you to understand the concept of shaders, write and apply them to your model's materials, and know where to logically place calls to the <code>BeginShaderMode()</code> and <code>EndShaderMode()</code> functions within your render process. Also, it not coming with a prescribed way to structure your code was a freedom that I found both liberating and intimidating which ended up with me refactoring my tiny demo a bit too many times.</p>
+<p>In the end I quite liked using raylib. It claims to be simple and straight-forward and is exactly that; giving you everything you need and nothing else. It's the kind of experience that would frustrate some people but leave others feeling free to wildly create as they see fit. My initial excitement was mixed with trepidation about whether it would be too difficult for me, but to my great joy I found it to be not difficult at all and it seems perfectly suited for small games and things you want to throw together in a weekend. Whether it would hold up to building a full game is yet unknown.</p>
+<h3>Godot</h3>
+<p><a href="https://godotengine.org/">Godot</a> is an open-source 3D game engine which has been under development for about two decades. It allows for building games using an interactive editor and its own scripting language GDScript, a language that has stolen all of its syntax from Python. Alternatively, you can use C# if you insist, and it also supports other languages through an extensions system. Godot recently gained a lot of popularity after Unity decided to <a href="https://mancunion.com/2023/10/19/a-timeline-of-the-unity-controversy/">burn the goodwill of its community</a>, and the subsequent flurry of attention and work has pushed the engine to improve a lot.</p>
+<p>I have some experience with Unity—not to mention having spent many an evening with <a href="https://lenain.info/building-unreal-like-it-is-19xx-again/">UnrealEd</a> as a youth—so much like how I wasn't digging into raylib as a complete novice I was fairly familiar with the editor-driven workflow. However, I was not prepared for how quickly and easily I got things working when I eventually sat down with Godot. I started by going through the tutorials in the <a href="https://docs.godotengine.org/en/stable/getting_started/introduction/index.html">official documentation</a> and then, wanting more but not wanting to spend an inordinate amount of time learning, I worked through a bunch of the games in the <a href="https://www.packtpub.com/en-us/product/godot-4-game-development-projects-9781804610404">Godot 4 Game Development Projects book by Chris Bradfield</a>. That turned out to be a great resource as it build my familiarity and gave me several example projects to reference if I needed it.</p>
+<aside>
+<p>As a fan of statically typed languages I considered trying Godot's C# support, but the majority of resources I found used GDScript, so as a novice I felt it prudent to not make things too difficult for myself. It's also modelled after Python, a language I use in my day job, so the syntax was very familiar. </p>
+<p>I'm curious about <a href="https://docs.godotengine.org/en/stable/tutorials/scripting/gdextension/what_is_gdextension.html">GDExtension</a> which would allow me to build modules in C++. I can definitely imagine prototyping functionality in GDScript and then rewriting it as a C++ module as a part of an optimisation procedure.</p>
+</aside>
+<p>In the end I was able to complete the rough game within a single day, much quicker than the two dozen or so hours I spent with raylib. However, I recognise that it isn't a fair point of comparison because the time I spent with raylib also included learning how to use it, whereas with Godot I learned the engine first before I started working on the actual game. And by virtue of using raylib first I solved several gameplay problems with it which I then copied over to the Godot implementation, saving precious time spent on experimentation.</p>
+<figure>
+<img src="/assets/blog/gameengine-godot.png" alt="A screenshot of the finished game demo inside the Godot 4 editor interface.">
+<figcaption>I used the same environment and character model for both the raylib and Godot demos. The reason it looks so much better here is because Godot was able to extract out the embedded lighting information from the environment file.</figcaption>
+</figure>
+<p>One aspect of Godot which initially intimidated me was how it's built on a hierarchical tree of nodes, all which come in different flavours with different uses and requirements. This requires a completely different approach than dealing with Unity's game objects and components, which I at first felt was a lot more intuitive. However, once I understood the node structure and how some nodes interacted with their child nodes I didn't really have any trouble working with it. The architecture has definitely grown on me and I now feel that seeing a tree of nodes makes it easier to quickly grasp how things are structured than having to scan a long list of complex components. I also noticed that I was spending more of my time in Godot writing code than tweaking component parameters in the UI like I would with Unity, which is a definite improvement.</p>
+<h2>Final Thoughts and Feelings</h2>
+<p>I must say that working with the Godot editor was really nice. After having spent so much time doing things manually with raylib it was a breeze to put things together using an editor. What I gave up in direct control I gained in efficiency and it handled the random assets I had found better than raylib. However, using Godot brought up some of the original trepidation that were the reason I wanted to run this experiment in the first place. Godot, Unity, and other heavy duty game engines are built on the idea that the foundation upon which your game is running is essentially a black box. You are provided with a lovely editor and lots of tools with which to build your game, but you don't need to know—nor are you necessarily invited to know—what's going on under the surface.</p>
+<p>Not to say that raylib doesn't have its fair share of black box unknowns as well. I have only the vaguest idea how the graphics are rendered and I generally don't care as long as I can load a mesh and have it show up correctly on the screen. However, what I feel epitomises the difference is for example how a script in Godot can receive a call to <code>_process(delta)</code>, which essentially functions as its main loop. You don't call it from a loop you yourself create, it gets called for you if the method is defined in the script you've attached to a node. Called by some arcane process that dwells deep within the cyclopean halls of the engine's inner workings.</p>
+<pre><code class="language-gdscript">## Move the character to a given target position
+func _process(dt: float) -&gt; void:
+	var distance: float = position.distance_to(move_target)
+	if distance &lt;= DISTANCE_THRESHOLD:
+		position = move_target
+		$GodotRobot/AnimationPlayer.play(&quot;Idle&quot;)
+		return
+
+	var travel_distance: float = move_speed * dt
+	position = lerp(position, move_target, travel_distance / distance)
+	look_at(move_target)
+	rotation_degrees.y -= 180  # the model is facing the wrong way :P
+	$GodotRobot/AnimationPlayer.play(&quot;Run&quot;)
+</code></pre>
+<p>There is nothing inherently wrong with this approach, nor do I really mind that there is a powerful engine running under the surface which I can tap into as needed. What I find uncomfortable is the seemingly uncharted depths of the engine and the implications it has on the code that I write. Godot is made up of nodes—a <a href="https://youtu.be/tO2gthp45MA">staggering amount</a> of nodes—which you use to construct a hierarchy that defines your game scenes. They're all quite different and have different uses, and some of them need a specific child node or two to work correctly. There are also <a href="https://docs.godotengine.org/en/stable/getting_started/step_by_step/signals.html">signals</a> you can use to send messages between nodes, or you can always call methods on them directly if you have a reference to them, with nodes themselves are retrieved by their names or based on which group they're in.</p>
+<p>This inherent complexity is incredibly daunting to novices and I have experienced it as a barrier to progress in the past. It's not necessarily that I don't know, or can't learn, how to accomplish something in Godot. The issue is that the overwhelming amount of choice means that <em>I don't know what I don't know</em>. The whole time I'm working on the game I have a sneaking suspicion that I'm doing something wrong. That my architecture is too convoluted, that I'm introducing needless inefficiencies, or that I'm not using the correct node for this exact scenario.</p>
+<p>This type of insecurity isn't necessarily unique to Godot as I remember it from my time with Unity. There was always a feeling that what I was making can be done <em>better</em> somehow, but that I was completely unable to see how. In contrast, raylib's relative simplicity meant that I understood more of what was going on, I was more responsible for what was going on, and I had more insight into where improvements could be made. With raylib I was much less likely to code myself into a corner because I was simply unaware of a key component or missing a fundamental understanding of how the engine wanted me to use it.</p>
+<p>Perhaps the doubt will fade with time, as it has done in other avenues of my life, but the intent behind this experiment was to figure out how to enjoy game development. And if my enjoyment is the key metric, it's of course going to factor into my decision.</p>
+<h3>On Not Using an Engine</h3>
+<p>The distinction between what makes an engine vs. a framework vs. a library is a taxonomological discussion that is beyond the scope of this article. Godot refers to itself as a game engine and raylib refers to itself as a library, so I will defer to their self-prescribed labels and use my recent experience with both to philosophise a bit on the experience of doing engine-less development.</p>
+<p>The advantages of using an existing game engine are numerous and intuitive. Most of the work is done for you and you can spend your time focusing on the gameplay and assets that make your game unique rather than worrying about the minutiae involved in getting the game to run. A common adage in game development circles is that if you want to focus on <em>actually making a game</em> you should use an existing game engine. Building your own, even using robust libraries like raylib, is going to demand so much of you and you will spend the majority of your time getting the fundamentals right rather than building the game. If someone else was in my position I would most likely recommend using an established engine, especially for someone new to game development.</p>
+<p>However, you are also completely restrained within the confines of what the engine is capable of and at the mercy of the architectural decisions of the engine's creators. If you attempt to stray outside of the boundaries of its capabilities you may either find it impossible, or must devote yourself to the gargantuan task of getting the engine to do something it wasn't made for. If the engine is built to be versatile enough to handle a myriad of different styles and genres, it will also be ladened with a dramatically increased complexity. This complexity will most likely result in the engine working inefficiently and its black box nature means that you probably have no means to cut out the pieces you don't need, or even understand at all what it's doing or where improvements could be made. You may end up with a large chunk of the engine stuck to the side of your game like a vestigial appendage.</p>
+<p>This is all very negative towards engines, but it's important to consider what you're losing when making a decision to use something that will do so much work for you. The decision will be weighted by what you want to accomplish and what you are interested in working on.</p>
+<p>In contrast, with no engine to do the heavy lifting you will need to consider so many aspects of the development that you wouldn't otherwise. How do you organise your code? Do you go hard-in on OOP or try some sort of Frankenstein entity/component system? Do you create representative game objects? What about objects that have meshes but no physics object or vice versa? How can you communicate between them? How is meta-data about the objects stored? How much functionality and data lives in the global scope? How do you control animations? How do you activate/deactivate components/objects/whatever as they are needed? When do you allocate memory and how do you make it safe to despawn something? And then on top of all of this, how can you make running around in the game world <em>feel</em> good?</p>
+<p>So many of these questions are answered for you when using an established engine. Engines force you to strictly stay within the lines, but as long as you do you can spare yourself the toil of having to figure everything out all this madness for yourself.</p>
+<h2>Conclusion</h2>
+<p>My philosophical musings on whether or not to use an engine aren't exactly novel nor particularly insightful. So have I wasted my time spending dozens of hours over a series of weeks running this experiment? I would say no, as building the same demo using both Godot and raylib allowed me to feel the distinction between the two approaches in a way that I didn't before. I became acutely aware of the almost insurmountable amount of work that using a library expected of me, and when I switched to the engine I felt liberated from the toil, only to feel almost trapped by its conventions.</p>
+<p>In the end this endeavour was for my own sake, to get a feel for what world I would rather inhabit. When I dig a hole do I want to be handed a simple shovel, or do I want to sit in an excavator with a thick manual on my lap? I'm glad that I was able to overcome the trepidation I felt towards digging into Godot, and I was equally enthralled by the promise of raylib's simple design. This article was an indulgence of my curiosity and isn't here to serve as an objective comparison of either approach, but I would wholeheartedly recommend both Godot and raylib to anyone looking to make games.</p>
+<p>Having concluded this little experiment and considered my options, I must admit that there is a, perhaps naïve, romance in the idea of building my own engine. Of going back to my roots and using a slew of libraries that I patch together in an ever-evolving project that is a reflection of my interests and my abilities. To be master of my domain and gain deep knowledge of algorithms, architecture, and efficient design. Building only exactly what I need and crafting a sleek, minimalistic expression of my dedication and skill as an experienced programmer!</p>
+<p>Nah, fuck that noise. I just want to make a game, so I'm gonna use Godot.</p>
+]]></content:encoded>
       <author>Michael Enger</author>
       <pubDate>Mon, 02 Sep 2024 00:00:00 +0000</pubDate>
     </item>
@@ -22,6 +157,30 @@
       <title>Seeding RNG Without the Current Time</title>
       <link>https://michaelenger.com/blog/rng-seed-no-time</link>
       <description>When developing a game for a fantasy console that doesn&#39;t have the concept of time I needed a way to seed the Random Number Generator.</description>
+      <content:encoded><![CDATA[<p>A while ago I was working on a little game for the <a href="https://wasm4.org/">WASM-4</a> fantasy console. It's a super limited platform with few colours and even fewers buttons, but it supports Rust and it felt like a good way to dip into game dev (which I do now and then) without having to worry about fancy graphics or super-involved gameplay. The game is an implementation of the one-page RPG <a href="https://twitter.com/deathbybadger/status/1567425842526945280">Potato by Oliver Darkshire</a> and I called it <a href="https://michaelenger.com/poteto/">ポテート</a> (potēto).</p>
+<p><img src="/assets/blog/poteto-game.png" alt="Screenshot of the potēto game showing 3 partially filled tracks, destiny, potatoes and orcs, as well as prompts to roll and hurl."></p>
+<p>The point of the game is to gather up potatoes while avoiding orcs and an encroaching destiny that threatens to take you away from your potato farm. You roll the dice using the <code>X</code> key and various events happen that advance one of the tracks. You can hurl potatoes over the fence to distract orcs using the <code>Z</code> key and you can reset the game at any point using <code>R</code>. It's a hard game to win, but it <em>is</em> possible.</p>
+<p>Being an RPG (role-playing game) the game relies a lot on RNG (random number generation). RNG requires an initial seed value to function properly. If you don't seed your RNG before you use it you're going to end up with getting the same results every time. Usually I would get the current system time and use that as a seed, a tried and trusted technique that I learned ...somewhere. But the WASM-4 fantasy console has no way to get the current time of the system it's running in, so I had to improvise.</p>
+<p>Before I describe what I did I must explain that this is an issue that is older than I am, and has been solved faster and better by the gurus whose shoulders I stand on. However, I didn't want to just look up an existing algorithm as this was a project done just for fun. So if my solutions seems rudimentary or pointlessly bad please excuse my ignorance. It was fun to make, and sometimes that's enough.</p>
+<p>For the actual random number generation I used an existing RNG library called <a href="https://crates.io/crates/fastrand">fastrand</a>, as I wasn't interested in making my own randomisation algorithm. Then to get a random seed to give it I took advantage of the fact that WASM-4 uses a standard update loop. I would increment a tick counter every time the loop repeated, and when a new random value was needed I would seed the fastrand <code>Rng</code> instance using this tick value. I also included the previous result along with the tick, to add another element of randomisation.</p>
+<pre><code class="language-rust">use fastrand;
+
+let rng = fastrand::Rng::with_seed(24601);
+let mut seed_counter: u64 = 0;
+let mut previous_result: u64 = 0;
+
+// On every update loop
+seed_counter += 1;
+
+// When getting a new random value given a range
+rng.seed(seed_counter + previous_result);
+let result = rng.u64(1..100);
+previous_result = result;
+</code></pre>
+<p>I was partially inspired by what I <em>think</em> was done in some NES games. I may be misremembering, but I vaguely recall hearing in a video essay that a game would start a counter when it first booted up and then use that counter to seed the RNG when the player first pressed the Start button. That way the player's action would be the randomising element.</p>
+<p>This seemed like such a clever idea and I tried to replicate it somewhat with my solution. Random numbers are only requested when the player rolls the dice, so the amount of ticks would vary depending on how quickly the player pressed the roll button. It may be overkill to seed the RNG every time a new value is requested, but it saved me from having to put in any logic for starting and stopping the tick counter. The game is very simple and even has no animations in it, so it's not like I was eating up a lot of processing power keeping the tick counter going or seeing the RNG.</p>
+<p>If you want to see the solution for yourself it's <a href="https://github.com/michaelenger/poteto/blob/main/src/rng.rs">available on GitHub</a>. It's very simple, but it worked out well for me and I enjoyed working within the limitations of the WASM-4 fantasy console. Making the game also showed me that the rules of the RPG are somewhat flawed and is too dependent on dice rolls, so the player has no real agency as to whether or not they win. Oh well 🤷</p>
+]]></content:encoded>
       <author>Michael Enger</author>
       <pubDate>Fri, 08 Mar 2024 00:00:00 +0000</pubDate>
     </item>
@@ -29,6 +188,38 @@
       <title>2023 In Review</title>
       <link>https://michaelenger.com/blog/2023-in-review</link>
       <description>I went to a lot of concerts in 2023 and here are some of the new artists I discovered.</description>
+      <content:encoded><![CDATA[<p>I go to a lot of concerts. I moved to London specifically because I wanted to be a part of a bigger music scene than the one that exists in Oslo. So while I'm here I want to make use of the city as much as I can. Back in 2022, once it felt safe enough to venture outside, I started keeping track of all of the bands I saw in a playlist. This was mostly because I constantly forgot who I had or hadn't seen, but also I was curious. I ended up seeing 62 different artists, which isn't bad for the course of a year. I kept this up in 2023 and in the course of that year I saw 146 different artists, mostly smaller independent acts playing on small stages to an even smaller audience.</p>
+<p>I noticed that I had gotten into a habit of seeing as much as possible, so as much as I'm successfully taking advantage of London I decided that I'd dial it back a bit in 2024. So as a way to celebrate last year's obsession I'm going to showcase some of the best new artists I've discovered this year. Note that I enjoy fast and aggressive music, so these will probably all trend towards that.</p>
+<h2>Grade 2</h2>
+<p>There is a promoter in London called <a href="https://www.tillthewheels.com/">Till The Wheels</a> who puts on a lot of punk and hardcore shows. I had been to many that were quite good so I got into the habit of just going to whatever show they had on when I had time. One of the shows was for <em>Grade 2</em> and I absolutely loved it! They have the kind of eponymous British punk rock sound, at least to me, and their live show was fast and fun and got pretty crazy.</p>
+<p><a href="https://www.youtube.com/watch?v=xggxT3efrGU"><img src="https://img.youtube.com/vi/xggxT3efrGU/0.jpg" alt="Grade 2 - Pubwatch"></a></p>
+<h2>J.O.B.</h2>
+<p>This band was a completely random discovery, which is always fun. I was at a show to see a friend of mine and happened to catch <em>J.O.B</em> who blew me away. Melodic rock music with a bit of a psychedelic vibe played by incredibly skilled musicians. These guys are young and just starting out, but I'm hoping they get discovered by a label or someone who can propel them further out.</p>
+<p><a href="https://www.youtube.com/watch?v=Ki4b2Yp9by4"><img src="https://img.youtube.com/vi/Ki4b2Yp9by4/0.jpg" alt="J.O.B - The Powers On High"></a></p>
+<h2>Moskito</h2>
+<p>This wasn't as much of a discovery I personally made, but <em>Moskito</em> are a band who was managed by the former manager of one of my bands. They play tight and aggressive rock music and their songs are a good mix of catchy and quirky. They also have a very cool aesthetic in their music videos and album art.</p>
+<p><a href="https://www.youtube.com/watch?v=OknE4lYwk6Y"><img src="https://img.youtube.com/vi/OknE4lYwk6Y/0.jpg" alt="MOSKITO - Killing Joke"></a></p>
+<h2>First Time Dead</h2>
+<p>Another discovery via Till The Wheels. These guys sound a lot like <em>Propagandhi</em>, which is a band I very much like but have yet to see live. It's kind of traditional punk rock with a lot of nice lead guitar melodies. I saw an ad of theirs where they were looking for a new vocalist which I considered for a minute, but the vocal style isn't one I'm very good at so I never applied.</p>
+<p><a href="https://www.youtube.com/watch?v=f4hEMU8locg"><img src="https://img.youtube.com/vi/f4hEMU8locg/0.jpg" alt="First Time Dead - Mediterranean Tears"></a></p>
+<h2>No Trigger</h2>
+<p>Yet another band I discovered via Till The Wheels. It's almost surprising that I wasn't aware of these guys as they have been going for a few years and are somewhat more established than the artists I usually see. They play unapologetic pop-punk and I've gotten somewhat obsessed with their new release.</p>
+<p><a href="https://www.youtube.com/watch?v=tRBIJ_6msjM"><img src="https://img.youtube.com/vi/tRBIJ_6msjM/0.jpg" alt="No Trigger - Antifantasy"></a></p>
+<h2>Chaos Reigns</h2>
+<p>I was doing research for where to record some hardcore songs for an upcoming project and I ended up at the website for <a href="http://www.monolithstudioslondon.com/">Monolith Studios</a>, who claim to be &quot;London's heaviest recording studio&quot;. Checking out their references I found a bunch of bands I enjoyed the sound of, of which <em>Chaos Reigns</em> was one. Coincidentally they were playing a show a few weeks later so I decided to stop by and check them out properly. The show was absolutely amazing and I got to know some of the members in the band, so now I try to see them whenever they play. Their style is very technical hardcore/metal songs that are somewhat reminiscent of <em>Every Time I Die</em> or <em>Protest The Hero</em>.</p>
+<p><a href="https://www.youtube.com/watch?v=eatMM3YiDMk"><img src="https://img.youtube.com/vi/eatMM3YiDMk/0.jpg" alt="Chaos Reigns - Big Beat Manifesto"></a></p>
+<h2>Soul Glo</h2>
+<p>I went to see <a href="https://www.youtube.com/watch?v=n0H3RlaQVrM"><em>Coheed and Cambria</em></a>, one of my favourite bands, for the 7th time and <em>Soul Glo</em> opened for them. They play really chaotic and screamy hardcore and I felt it was a bit of a strange combination with Coheed's style of music. I remember mentioning to a guy I had met at that show that I would love to see them play a smaller venue... which is exactly what they did about 3 weeks later. So I went to see them at the smaller venue and it was an absolutely wild show; exactly what I wanted.</p>
+<p><a href="https://www.youtube.com/watch?v=0IaAs4D14kw"><img src="https://img.youtube.com/vi/0IaAs4D14kw/0.jpg" alt="Soul Glo - Gold Chain Punk (whogonbeatmyass?)"></a></p>
+<h2>Buds.</h2>
+<p>I was at a day festival a friend of mine was playing at and it was clear that I was at the wrong show. Most of the music wasn't interesting at all and I was not having the best time... until <em>Buds.</em> played their set. Live their music has a more melodic hardcore feel to it, but I can imagine someone listening to their studio recordings and calling it &quot;aggressive indie rock&quot; or something. They're lovely people and I've seen them 3 times now.</p>
+<p><a href="https://www.youtube.com/watch?v=mhz_oExCfus"><img src="https://img.youtube.com/vi/mhz_oExCfus/0.jpg" alt="Buds. - Medicinal Cathedral"></a></p>
+<h2>The Callous Daoboys</h2>
+<p>When I went to see <em>Coheed and Cambria</em> (the same show I discovered <em>Soul Glo</em> at) I met <a href="https://www.instagram.com/bearfeetnath/">a guy</a> in the queue who I ended up hanging out with. He recommended that I check out <em>The Callous Daoboys</em>, a mathcore band from the US who he was currently obsessed with. It's clear that we share music taste because I gave them a listen and they were amazing. He and I ended up meeting up again when they came to London later in the year.</p>
+<p><a href="https://www.youtube.com/watch?v=feRMvnP-rj8"><img src="https://img.youtube.com/vi/feRMvnP-rj8/0.jpg" alt="The Callous Daoboys - Waco Jesus"></a></p>
+<h2>The End</h2>
+<p>Those were my highlights for 2023. It was an intense year with a lot of travelling to and from venues, so the plan is to slow things down this year. Even though I have tickets to a festival next week, and am going back to Norway for a show the week after, I am not going to keep track of the artists I see anymore. I got a little too focused on seeing as many shows as possible to get the number up and I need to focus on my own music. I did end up recording at Monolith Studios and I have four songs which will be released at some point in 2024.</p>
+]]></content:encoded>
       <author>Michael Enger</author>
       <pubDate>Sun, 07 Jan 2024 00:00:00 +0000</pubDate>
     </item>
@@ -36,6 +227,53 @@
       <title>The Mac Needs Proton</title>
       <link>https://michaelenger.com/blog/mac-needs-proton</link>
       <description>As a frustrated &#34;Mac Gamer&#34; I desperately wish Apple would just concede the fight and work with Steam to make Windows games work better on macOS.</description>
+      <content:encoded><![CDATA[<p>I have a confession to make. I am a Mac Gamer™. Or I guess more accurately, I want to be. I use an iMac as my main computing device, for a myriad of reasons that are irrelevant to the current discussion, and I would <em>love</em> to be able to game on it as well. It's getting a bit old (I have the 21.5-inch Retina model from 2017), but it's fully capable of playing the types of games I like, mostly games from the mid-to-late 2000s. However, it's unable to run those games because Apple refuses to play nice.</p>
+<h2>The Mac Gamer's Timeline of Disappointment</h2>
+<h3>September 2003</h3>
+<p><a href="https://store.steampowered.com/">Steam</a>, the digital marketplace for PC games, is released, heralding a new future of digital distribution. As much friction as it caused when it first came out, this was an inevitability that the world has embraced and it honestly made gamers' lives better.</p>
+<h3>June 2007</h3>
+<p>The original iPhone is released which transforms Apple into one of the biggest companies in the world. Steve Jobs was doing well with dragging the company out of the gutter, but the launch of the iPhone resulted in explosive interest in Apple and in Macs from people who were previously disinterested.</p>
+<h3>July 2008</h3>
+<p>The App Store is opened and there is a gold rush for app and game developers who all want to capture this new, absolutely massive, market. This is around the time when I got my first MacBook, inspired to make my own mobile game. This plan of course goes nowhere.</p>
+<h3>May 2010</h3>
+<p>Steam is available on macOS! The wide adoption of Macs has caught the eyes of game developers who are toying with porting their PC games to the platform. Valve, ever ready to facilitate digital distribution, jump on the chance to make it easier for both developers and gamers to embrace this new world. Although there is only a subset of developers who are taking advantage of this new market I still consider this is the start of the good times.</p>
+<p><img src="/assets/blog/steam-mac.jpg" alt="Screenshot of Steam running on macOS. Credits to Federico Viticci at MacStories"></p>
+<h3>January 2011</h3>
+<p>The Mac App Store is launched. I doubt this was done as a response to Steam coming to macOS, but Apple at least are trying to make discovering new apps (and games) easier for their Mac users. They also want that sweet 30% cut, of course.</p>
+<h3>February 2013</h3>
+<p>Steam is available on Linux, for some reason? This felt like a &quot;sure, why not?&quot; move at the time, but in hindsight it was a telltale sign of things to come. Valve had started to experiment with building their own hardware and released the Steam Machine later that year to a lacklustre response. Nobody was impressed and macOS was still considered the main &quot;sibling&quot; platform to Windows with macOS versions of game coming now and then, mostly from indie developers.</p>
+<h3>June 2019</h3>
+<p>Apple announces Mac Catalyst, a set of tools and libraries meant to make it easier to port iOS apps to macOS. It allows you to add support for platform-specific features or UI paradigms, but still maintain a single codebase. In essence have a single app for multiple platforms, the start of a trend where the iOS and macOS platforms are seemingly merging.</p>
+<h3>October 2019</h3>
+<p>macOS Catalina is released and with it comes a dagger through the heart of Mac Gamers. Despite being deprecated for many years, this was the release which officially dropped support for 32-bit applications completely. Upgrading to Catalina meant that you lost the means to play 90% (if not more) of the games on Steam that claim to support macOS.</p>
+<p>Developers are encouraged to update their games to 64-bit, but for many it doesn't make sense to put in the effort for a small subset of users. This was, after all, not their fault... it was Apple who had decided that backwards compatibility was too much hassle. This move kills Mac gaming almost outright with many people, myself included, having their game libraries decimated.</p>
+<h3>November 2020</h3>
+<p>Apple releases the M1 chip, an ARM-based processor meant for the new generation of Macs. They are officially moving away from using regular x86-64 processors provided by Intel to their own developed chips that are similar to the A1 chips used in iPhones and iPads. The chips are a great success and blow the old architecture out of the water in all the benchmarks... while also bringing the iOS and macOS platforms even closer together.</p>
+<h3>February 2022</h3>
+<p>Valve releases the Steam Deck which does what the Steam Machine couldn't. This device is moderately priced, has a form factor reminiscent of the Nintendo Switch, and has just enough computing power to play most of the games people want to play. It is a runaway success and singlehandedly kickstarts a wave of handheld PC gaming devices.</p>
+<p><img src="/assets/blog/steam-deck.jpg" alt="A promo photo of the Steam Deck."></p>
+<p>However, the one key factor that most of Valve's competitors are unable to replicate is Steam OS, the bespoke Linux-based operating system that runs on the Steam Deck. Leveraging their experiences with the Steam Machine, Valve essentially built their own Linux distribution which is really good at running Steam and the games purchased through it. To maximise support for the game libraries that people have been building since 2003 they've made enhancements to <a href="https://www.winehq.org/">Wine</a>, a compatibility layer meant to let you run Windows applications under Linux. This new Wine fork is called Proton and with its integration into Steam it works so much better than anyone could've expected.</p>
+<p>Mac Gamers stand on the sidelines, jaws agape in disbelief, as the majority of games released on Steam suddenly &quot;just work&quot; on Linux.</p>
+<h3>June 2023</h3>
+<p>Apple, perhaps realising that they've lost a lot of ground in the lucrative gaming market, releases <a href="https://developer.apple.com/videos/play/wwdc2023/10123/">Game Porting Kit</a>. This is a set of tools meant to help developers port their Windows games to macOS, by for example converting their DirectX pipeline to Metal and making the game run natively on the M1 architecture. In an effort to seem serious they even brought <a href="https://www.theverge.com/2023/6/5/23749698/apple-mac-os-death-stranding-directors-cut-hideo-kojima-wwdc-2023">Hideo Kojima on stage at WWDC</a> to talk about how Death Stranding, a AAA video game originally released in 2019, is coming to the Mac.</p>
+<p>There was a flurry of activity around this new porting kit, with developers digging into it to find out how it works... and turns out it's just like Valve's Proton. Apple have forked Wine and added a bunch of their own features and fixes on top of it, then wrapped the whole thing into a <em>Kit</em> meant for testing and debugging games. People of course don't care about any of that and immediately start trying to find ways to just play their games using it.</p>
+<h3>February 2024 (<a href="https://help.steampowered.com/en/faqs/view/743F-2E0E-C9A5-C375">Announced</a>)</h3>
+<p>Steam is planning to drop support for macOS High Sierra and Mojave, the last macOS versions which supported 32-bit apps. If the release of macOS Catalina was Mac Gamers getting stabbed in the neck, this is the last shovelful of dirt hitting the grave.</p>
+<h2>Aftermath</h2>
+<p>So here we are... the macOS platform has grown massively in the past decade and a half, much like the gaming market. Valve saw where things were going and attempted to get in on the action, but it seems like Apple weren't really interested in fostering gaming on Mac. They want to focus on iOS and have even taken steps to move their desktop platform in that direction. It wouldn't surprise me if we see them merging the operating systems at some point in the future.</p>
+<p>However, as much as I am bitter about not being able to use my Mac to game on, there is nothing irrational about Apple's decisions. The ridiculously lucrative mobile gaming market is a place where Apple is in the lead, so why would they want to fight with Microsoft for the attention of the fickle and legendarily toxic Real Gamers™? As long as the majority of people want to play casual games on their phones and Apple can keep skimming off the top of all those  sweet microtransactions they have no reason to change their priorities.</p>
+<p>But something has seemingly changed. Apple have clearly realised that there is a lot of money to be made off desktop gaming and they have made moves to seemingly make macOS a more gaming-friendly platform. However, in classic Apple fashion they have decided that instead of making their operating system better at playing existing games, they're going to incentivise people to jump into their walled garden.</p>
+<p><img src="/assets/blog/hideo-kojima-wwdc.jpg" alt="A photo of Hideo Kojima from the WWDC 2023 presentation. It is subtitled with the text 'I have been a die-hard Apple fan since I bought my first Mac back in 1994.'"></p>
+<p>My impression is that everyone knows that this move by Apple isn't going to actually change anything and nobody is really interested in porting their games. Hideo Kojima will take their money, hire some 3rd party company to port the game, and go off to <a href="https://youtu.be/M0tmk5lJOSs">hang out with celebrities</a> without a care in the world. And the gamers have already found a way to extract the innards of the Game Porting Kit and turn it into an app which can run Windows games, cheekily named <a href="https://getwhisky.app/">Whiskey</a>. Apple lost everyone's trust when they cut us off from our gaming collections and developers aren't impressed with these new shiny new shackles.</p>
+<p>As of this writing Death Stranding has yet to be released for macOS.</p>
+<h2>What The Mac Needs</h2>
+<p>If Apple want people to game on Mac they need to go to where gamers are. The kind of person who is interested in playing intense, engrossing games and building a large gaming library already has. They did it on Windows, probably via Steam, and have dozens, if not hundreds, of games that they don't want to lose access to by moving to a different platform.</p>
+<p>Allowing gamers to make use of their existing libraries is exactly what Valve did, and based on the runaway success they've had with the Steam Deck one can say that it has paid off for them. I don't have a Steam Deck (yet) but I've installed Linux on an old laptop and I can tell you Proton works like an absolute charm. Some games require a bit of tweaking, but there is a <a href="https://www.protondb.com/">readily available database of fixes</a> and most of the time it's just a matter of choosing the correct Proton version.</p>
+<p>Developers don't really have an incentive to port their games to macOS when the market is a fraction of what it is on Windows. And gamers aren't going to choose Macs since they know that the games they already have won't work there. Now if someone wants an alternative to Windows they can even choose Linux for an (almost) turnkey experience, so what does the Mac have to offer? The Game Porting Kit could easily have been open-source contributions to Wine, and I bet you that Valve would love to be able to turn on their compatibility layer on macOS. If Apple were actually serious about supporting gaming in Mac they'd find a way to make it work.</p>
+<p>But of course they won't.</p>
+<p>I am completely aware that the reason Apple would rather incentivise developers to join them in their exclusive club rather than go to where people are is because there's no money in it. They aren't actually interested in making macOS a good platform for gaming, they want people to spend more money in the Mac App Store. Adding improvements to Wine and partnering with Valve to make Proton work as seamlessly on macOS as it does on Linux wouldn't let Apple see it's 30% cut. Making the macOS platform attractive to a wide range of users who will then buy their pricey hardware isn't as lucrative as getting their existing Mac owners to spend more on apps. People just <a href="https://gagadget.com/en/business/233842-global-pc-market-collapses-29-in-early-2023-apple-fared-worst/">don't buy computers like they used to</a> so now it's all about getting people to pay monthly for add-on services and buying microtransactions (<a href="https://www.techspot.com/news/48412-study-91-of-mobile-game-revenue-comes-from-microtransactions.html">which they do</a>).</p>
+<p>Gaming on Mac is languishing and that makes me sad.</p>
+]]></content:encoded>
       <author>Michael Enger</author>
       <pubDate>Sat, 16 Dec 2023 00:00:00 +0000</pubDate>
     </item>
@@ -43,6 +281,30 @@
       <title>Implementing Search for a Pure Frontend Application</title>
       <link>https://michaelenger.com/blog/frontend-search-engine</link>
       <description>If you&#39;re running a web app that has no backend and all the data is stored locally, you may be able to use this technique to implement search on the data.</description>
+      <content:encoded><![CDATA[<p>As I have <a href="/blog/json-datastore">discussed before</a> I recently built a video streaming website which has no backend and uses a static JSON object as its datastore. I wanted to add search to this website as it contains thousands of videos and finding the right video without searching would be cumbersome. Considering how the site has no backend there is no way to plug into a search engine so I would have to build one myself.</p>
+<p>A simple implementation would perhaps be to iterate through all the videos and check if the titles contained the search query. However this screamed inefficiency to me and is reminiscent of running a <code>WHERE LIKE '%text%'</code> on an SQL server. So I considered how search engines tend to work and settled on the idea that what we needed was a search index.</p>
+<p>The concept is quite simple: we go through all the videos and extract out every word in the titles, putting them in a list where each word had the IDs of the videos where they appeared:</p>
+<p><img src="/assets/blog/search-index-words.png" alt="A diagram a list of titles in one box with an arrow to another box that contains a list of the words which appear in those titles."></p>
+<p>Now instead of comparing the search query against the titles themselves, we would check it against this word list. It also allowed us to preemptively format all the text in the titles, converting them to lowercase and removing any superfluous characters we may not want. We also did that to the search query itself, splitting it into separate words and formatting them so that we would be comparing similarly formatted text.</p>
+<p><img src="/assets/blog/search-index-word-format.png" alt="A diagram showing the words in the title don't worry just explode converted to words by making them lowercase and removing all punctuation marks."></p>
+<p>The search engine still had to iterate through each word, but the list of words was smaller than the list of videos and we didn't have to format the text in the title every time we compared. The resulting algorithm was quite small:</p>
+<pre><code class="language-typescript">const searchWords = splitAndFormat(searchQuery)
+
+const videos = new Set()
+for (const searchWord of searchWords) {
+	for (const word of videoIndex) {
+		if (word.search(searchWord) !== 1) {
+			videoIndex[word].forEach(videoId =&gt; videos.add(videoId))
+		}
+	}
+}
+</code></pre>
+<p>This was the first version of the search and it actually worked quite well! Pre-calculating the index didn't take enough time to be noticeable and the search was fast enough that I doubt a dedicated backend could've improved the query time. However, there was one issue that I noticed immediately, which was that the search results were returning in a seemingly random order.</p>
+<p>They weren't actually random, but the search wasn't taking into consideration exact matches or whether it was matching on multiple words in a title. For example searching for &quot;horror game&quot; would return &quot;This game is bad&quot; and &quot;Horrorific Feels&quot; before &quot;Best horror game&quot;, which is a better match. To alleviate this we would have to add scoring to the search results.</p>
+<p>The algorithm was changed so that it would keep a track of which video was found and it's &quot;match score&quot;. The score would be incremented by 10 if the word matched exactly and 5 if it didn't, checking each word in the search query individually:</p>
+<p><img src="/assets/blog/search-index-score.png" alt="A diagram showing the phrase horror game with an arrow pointing to a box with a set of titles and their scores. This game is bad has 10, horrorific feels has 5, and best horror game has 20."></p>
+<p>This worked out exactly as I'd hoped and that is where the search algorithm is at the moment. It is somewhat less naïve than just checking all the titles one after another, but there's probably lots of room for improvement. If you are so inclined, the project is <a href="https://github.com/Giant-Bomb-Preservation-Project/duders-zone">available on GitHub</a> so don't be afraid to check it out and provide any feedback/suggestions you may have.</p>
+]]></content:encoded>
       <author>Michael Enger</author>
       <pubDate>Wed, 08 Nov 2023 00:00:00 +0000</pubDate>
     </item>
@@ -50,6 +312,17 @@
       <title>Why I Pay For Search</title>
       <link>https://michaelenger.com/blog/why-i-pay-for-search</link>
       <description>From a desire to avoid being tracked in everything I do, I am willing to pay to search the Internet.</description>
+      <content:encoded><![CDATA[<p><strong>2024-05-08 UPDATE:</strong> Unfortunately, since writing this article it's become clear that the CEO of Kagi is a bit of <a href="https://d-shoot.net/kagi.html">a condescending dickhead who wants to push everyone towards using AI</a>. So I'm on the lookout for an alternative, but I can't find a search engine which is willing to take my money rather than showing me ads so if you know of one <a href="mailto:hello@michaelenger.com">please do reach out</a>.</p>
+<p><strong>--</strong></p>
+<p>Search is one of those foundations of the modern Internet. The Internet is a wild and wonderful place with all manner of strange and useful information to be found, but without the means to sift through it all that abundance is wasted.</p>
+<p>For a long time Google was the de-facto standard for searching the Internet. When it was launched it offered a simplistic and effective way to search without all the cruft that other search engines at the time were known for. However, in recent years its quality and usability has decreased, at least in my experience. With Google's main business model being user tracking and serving ads, it was just a matter of time before its monetary motivations would result in a degraded user experience. I am someone who goes out of their way to avoid being tracked as much as possible and it may be that my experience with Google's search results being so bad is because it doesn't know enough about me to give me helpful results. With Google being the biggest search engine in the world it also faces a lot of pressure trying to combat people gaming the system to improve their placement in the search results. All this coupled with its motivation to steer people towards paid placements has resulted in a search experience that just flat out sucks. But this is Google.. what alternative do we have?</p>
+<p>Enter <a href="https://kagi.com/">Kagi</a>, a search engine that you have to pay a subscription fee to use. This is probably a weird and alien concept in the modern web where most services are funded by tracking and advertisement, but I welcome the opportunity to pay for something that I actively use. I search for hundreds of things every month and I find comfort in knowing that my search queries aren't being collected and used to build a profile on me. However, this need is particular to me and my predilections, so what argument can I make for using Kagi outside of the desire for privacy?</p>
+<p>Well, the search results are just better. If Kagi didn't track me, but served me pointless results I wouldn't have been sticking around for as long as I have (6 months per the writing of this article). It accomplishes this using its own indexing and search algorithm, which I'm assuming is pretty well constructed given the results, but also with a feature that I haven't seen in any other search engine: the ability for me to manually adjust which sites I want to see more or less of.</p>
+<p><img src="/assets/blog/kagi-ramen-search.png" alt="The Kagi website showing a search for ramen restaurant london. Next to the first result is an overlay which shows controls for adjusting the ranking for that site (block, lower, normal, raise, pin)."></p>
+<p>If I see a result from a website I don't like, I can specify that I want to lower its ranking. I can also flat out block certain sites or pin them to the top if they show up in the results for my query. This is such a killer feature that it's worth the price of admission by itself (which is currently $10/month). This, coupled with the ability to create lenses that focus your search within specific fields, and being able to disable inline results (like maps, images, news, etc.) means that I'm getting the power to create a search experience catered to me.</p>
+<p>Using Kagi gives me an experience that is surprisingly uncommon in the modern web: the interests of the service aligns with my own. I'm here because I want to search for things, they're here to let me search for things. There is no ulterior motive behind them providing the service, nor alternative revenue stream they're trying to push me towards. They do search; I want to do search; so here we are. I also understand that providing a service like this isn't free, and I am in the privileged position where I can afford to pay for it, so I do. It's actually quite refreshing to have this kind of transparent relationship with an online service and I highly recommend it.</p>
+<p><em>For the sake of disclosure I want to say that I am in no way affiliated with Kagi nor have I been paid/coerced/told to write this. I just think they're neat.</em></p>
+]]></content:encoded>
       <author>Michael Enger</author>
       <pubDate>Sun, 10 Sep 2023 00:00:00 +0000</pubDate>
     </item>
@@ -57,6 +330,102 @@
       <title>Using JSON as a Data Store for a TypeScript Application</title>
       <link>https://michaelenger.com/blog/json-datastore</link>
       <description>I build a web app which has no backend and opted for storing all the data as JSON files.</description>
+      <content:encoded><![CDATA[<p>Let's start with some context: <a href="https://www.giantbomb.com">Giant Bomb</a> is a website about video games. It was created in 2008 (15 years ago as of this writing) by Jeff Gerstmann and Ryan Davis as a response to Gerstmann's tactless firing from GameSpot, another website about video games. It has had a tumultuous life, having switched corporate owners many times, and last year the new owners decided to make the most ironic of moves by firing Gerstmann from the website he founded. This decision had the effect of radicalising a bunch of long-time fans into extracting all the video content and uploading it to <a href="https://archive.org/details/giant-bomb-archive">a collection on Internet Archive</a>. The legality of this questionable, but media conglomerates are notorious for shutting down websites without warning and we'd rather skirt the law than have the content disappear off the Internet.</p>
+<p>However, the collection isn't particularly nice to browse if you're looking for a specific video or show, so I thought I'd volunteer my skills to alleviate the issue. Enter <a href="https://duders.zone/">Duders Zone</a>, a website whose design is inspired by 2010s-era Giant Bomb, and which features the videos collected into shows and with some features that (hopefully) provide a smoother browsing experience. It's built in TypeScript on <a href="https://svelte.dev/">Svelte</a> and the source is available on <a href="https://github.com/Giant-Bomb-Preservation-Project/duders-zone/">GitHub</a>.</p>
+<p>The requirements for a site like this are a bit unique as the content is, in theory, completely static but the site has a few dynamic elements which make it impossible to use a pure Static Site Generator to create it. The random page (which shows a random video) and the historic page (which shows videos for the current day/month) need to be able to fetch videos independently from their shows. It also has <em>a lot</em> of videos organised into dozens of shows, so it would need some sort of data store to contain them with the means to fetch specific videos, sort by date, etc.</p>
+<p>I considered using a formal database, but I wanted the project to have the least amount of maintenance as possible. As the videos themselves are hosted on Internet Archive the site just contains the meta data and some images, which could easily be hosted for free on any static host. The last thing I wanted was to have to run some sort of database or backend, so it all needed to be self-contained. I went back and forth on what I wanted to do for a while, but in the end I recreated a relational database using JSON.</p>
+<p>That makes it sound fancy, but in reality it's just two JSON files: one which contains the <a href="https://github.com/Giant-Bomb-Preservation-Project/duders-zone/blob/main/src/lib/data/videos.json">video meta-data</a>:</p>
+<pre><code class="language-json">[
+    {
+        &quot;id&quot;: &quot;0001-quick-look-gamecock-demos-legendary&quot;,
+        &quot;title&quot;: &quot;Quick Look: Gamecock Demos Legendary&quot;,
+        &quot;description&quot;: &quot;Gamecock shows us Legendary. We ask if we can hit record...&quot;,
+        &quot;date&quot;: &quot;2008-08-27T00:00:00Z&quot;,
+        &quot;thumbnail&quot;: &quot;https://archive.org/services/img/0001-quick-look-gamecock-demos-legendary&quot;
+    },
+    {
+        &quot;id&quot;: &quot;0002-quick-look-a-quick-look-at-burnout-bikes&quot;,
+        &quot;title&quot;: &quot;Quick Look: A Quick Look At Burnout Bikes&quot;,
+        &quot;description&quot;: &quot;Jeff takes a quick tour through the new content available for Burnout Paradise.&quot;,
+        &quot;date&quot;: &quot;2008-09-18T00:00:00Z&quot;,
+        &quot;thumbnail&quot;: &quot;https://archive.org/services/img/0002-quick-look-a-quick-look-at-burnout-bikes&quot;
+    },
+    ...
+]
+</code></pre>
+<p>And the other which contains the <a href="https://github.com/Giant-Bomb-Preservation-Project/duders-zone/blob/main/src/lib/data/shows.json">show meta-data</a>, including a list of IDs for the videos in the show:</p>
+<pre><code class="language-json">[
+    {
+        &quot;id&quot;: &quot;endurance-run&quot;,
+        &quot;title&quot;: &quot;Endurance Run&quot;,
+        &quot;description&quot;: &quot;Vinny and Jeff sit down and take a crack at the latest game in the Shin Megami Tensei series. Will they make it through the entire game?&quot;,
+        &quot;poster&quot;: &quot;2437462-persona 4.jpg&quot;,
+        &quot;logo&quot;: null,
+        &quot;videos&quot;: [
+            &quot;endurance-run-persona-4-part-01&quot;,
+            &quot;endurance-run-persona-4-part-02&quot;,
+            &quot;endurance-run-persona-4-part-03&quot;,
+            ...
+        ]
+    },
+    ...
+]
+</code></pre>
+<p>There are a myriad of other ways the data could've been modelled but in my head I was replicating the following structure:</p>
+<p><img src="/assets/blog/duders-zone-data-model.png" alt="A UML diagram showing three objects: video_show, video, and show. The video_show object contains a show_id member with an accompanying arrow pointing to the show object, as well as a video_id member with an arrow pointing to the video object."></p>
+<p>Most (if not all) JavaScript frameworks have support for loading JSON directly from source files, so that's what I did:</p>
+<pre><code class="language-typescript">import showData from '$lib/data/shows.json'
+import videoData from '$lib/data/videos.json'
+</code></pre>
+<p>This resulted in generic objects and as I was using TypeScript I needed to define type interfaces for both the video and show:</p>
+<pre><code class="language-typescript">interface Show {
+	readonly id: string
+	readonly title: string
+	readonly description: string
+	readonly logo?: string | null
+	readonly poster?: string
+	readonly videos: readonly string[]
+}
+
+interface Video {
+	readonly id: string
+	readonly title: string
+	readonly description: string
+	readonly date: Date
+	readonly show?: string
+	readonly thumbnail?: string
+}
+</code></pre>
+<p>Then I iterated through the raw data coming from the JSON files and put them into maps of their respective types, with the key being the ID. The shows went in as-is, but for the videos I converted the date from a string to a proper <code>Date</code> object so that I could do some sorting and formatting:</p>
+<pre><code class="language-typescript">const shows: { [key: string]: Show } = {}
+for (const show of showData) {
+	shows[show.id] = show
+}
+
+const videos: { [key: string]: Video } = {}
+for (const video of videoData) {
+	videos[video.id] = {
+		id: video.id,
+		title: video.title,
+		description: video.description,
+		date: new Date(video.date),
+		thumbnail: video.thumbnail,
+	}
+}
+</code></pre>
+<p>Now I had a fully typed &quot;database&quot; of content which I could use to populate the pages, but I thought that for the sake of organisation I didn't want to just pass these around. So I ended up making a bunch of helper functions that could be used to &quot;fetch&quot; data:</p>
+<pre><code class="language-typescript">function getRandomVideos(amount: number): Video[] {
+	const shuffled = Object.values(videos).sort(byRandom)
+
+	return shuffled.slice(0, amount)
+}
+
+function getShowById(id: string): Show | null {
+	return id in shows ? shows[id] : null
+}
+</code></pre>
+<p>It's a basic concept but I'm quite happy with the results. The full data store takes up a few megabytes, which is in no way too much for the web browser to handle. It's also very simple to work with and requires no extra maintenance beyond what the SPA already needs. If you're interested in more details you can always check out <a href="https://github.com/Giant-Bomb-Preservation-Project/duders-zone/blob/main/src/lib/data.ts">the full source code</a>, or you can watch <a href="https://duders.zone/shows/mario-party-party/gb-2300-11656-IDLOD6E">a bunch of grown men get angry at a video game</a>.</p>
+]]></content:encoded>
       <author>Michael Enger</author>
       <pubDate>Mon, 28 Aug 2023 00:00:00 +0000</pubDate>
     </item>
@@ -64,6 +433,42 @@
       <title>Brage 2.0: Redesigning My Static Site Generator</title>
       <link>https://michaelenger.com/blog/brage-2-point-0</link>
       <description>I&#39;ve updated my home-grown static site generator to support blog posts!</description>
+      <content:encoded><![CDATA[<h2>The Beginning</h2>
+<p>Recently I was inspired by some friends to start a blog. This won't be my first foray into the Blogosphere™ as I ran a personal blog from about 2005 to 2011 where I wrote about games, programming, and all sorts of nerd stuff. The blog came to an unceremonious end when my GoDaddy domain expired and instead of telling me about it they sold it to some rando who scraped all my content and resurrected the blog under his control alongside ads for brain enhancing drugs. I stopped using GoDaddy and stopped blogging...</p>
+<p>Until now! More than a decade has come and gone, I'm at a different job in a different country and I have a lot more tattoos. So the way I am approaching this new blog is going to be a bit different than last time. What I'll write about will probably be more of the same, but the more interesting thing is what tech I want to use.</p>
+<p>The old blog was run on various systems, at one point Tumblr, at one point WordPress, and for a long time I was managing a home-made PHP application. But as time has changed me it has also changed web technology. I was there to witness the commercial world go from PHP monoliths to Node.js microservices to Single-Page Applications, and if I am honest the progress has made me weary. To say I have JavaScript fatigue is to grossly misrepresent my resentment.</p>
+<p>However, one trend that I have embraced fully is static site generators. They take source files, usually written in <a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a>, and combine them with some assets and some styling to spit out flat HTML files. Some of them still insist on also running an SPA on top, but most just produce a bunch of files that can be uploaded to any number of hosting services.</p>
+<p>Enter <a href="https://github.com/michaelenger/brage">Brage</a>, a static site generator I wrote in Swift and then re-wrote in Go. I created it because the other static site generators I was looking into (like <a href="https://jekyllrb.com/">Jekyll</a> and <a href="https://gohugo.io/">Hugo</a>) felt too heavy and cumbersome for my needs. Why were they too heavy? Ironically because they were focused on supporting blogs whereas I just wanted simple websites.</p>
+<p>I originally built Brage to help me maintain the websites for <a href="https://youngfatigue.com/">Young Fatigue</a> (a band I'm in) and <a href="https://mortenmyklebust.com/">Morten Myklebust</a> (an artist I'm friends with), alongside my own. I wanted to be able to create the pages in HTML and Markdown, and have the generator combine it with a layout so that I didn't have to change every page manually every time I made stylistic changes. I also wanted to be able to provide some data (in YAML format) and have a template engine turn it into HTML. For example, <a href="https://michaelenger.com/code/">my portfolio</a> is defined as a bunch of lists containing meta data for each entry. This makes it super easy to add or remove things. The source for this website is <a href="https://github.com/michaelenger/michaelenger.github.io">available on GitHub</a> if you're curious as to how it all fits together.</p>
+<p>But now that I <em>do</em> want to blog my options are to either use an existing generator, or to modify Brage to support it. And what kind of massive nerd would I be if I didn't choose the latter?</p>
+<h2>The Design</h2>
+<p><em>Note: I'm writing this post after the work has been completed, so I can (and do) omit any mistakes or bad ideas I originally had.</em></p>
+<p>Like all good software projects I started with a list of requirements... which I subsequently ignored when the real work began. I like using lists to collect my thoughts, but as this project was for my own personal need it was bound to changed as I went along. The overall goal was to support some sort of time-based content with the following traits:</p>
+<ul>
+<li>They all live under a specific URI (it ended up being <code>/blog</code>).</li>
+<li>They contain meta data: title and date. I also wanted to have tags at some point, but they seemed to add a lot of complexity so I dropped it.</li>
+<li>I will be able to list them all out in one of my templates using some variable (which turned out to be <code>site.posts</code>).</li>
+</ul>
+<p>Since I was already going to do a bunch of work I also had some improvements that I wanted to implement:</p>
+<ul>
+<li>Support for other file extensions. I originally only supported <code>.html</code> and <code>.markdown</code>, but I very much wanted to use <code>.md</code> for Markdown files.</li>
+<li>Change from using Go templates to using <a href="https://mustache.github.io/">Mustache</a>. This was because I wanted the templating to be independent of the programming language I used. When Brage was written in Swift I used <a href="https://stencil.fuller.li/">Stencil</a> so when I changed to Go I had to change every single template in all the sites. I needed to do that again if I were to migrate to Mustache, but at least I won't have to do it a fourth time if I ever get tired of Go.</li>
+</ul>
+<p>I want to take a moment to consider the philosophy behind a bunch of my decisions. As this project has a target user base of one person I don't really have to take into consideration how others <em>may</em> want to use it. I know exactly how I would want to use it so I could avoid a lot of complexity by not implementing any other options. I know that frameworks like Ruby on Rails gets some flak for their adherence to <a href="https://en.wikipedia.org/wiki/Convention_over_configuration">Convention over Configuration</a> but in this case it didn't really matter. If nobody other than ever uses Brage it would still be a successful projects, so I can save a lot of time by just making it do only what I want.</p>
+<p>This is the justification for a decision that sets my site generator apart from many others out there: it doesn't use themes. With other generators you define your content and it will combine that with a theme, either pre-made or created by you, to generate the final HTML. Since I wanted Brage to help me manage a small handful of wildly different sites it was overkill to add any sort of theming support. The styling, structure, and content all live in a single directory and I just point Brage at it and we're done.</p>
+<p>However, a drawback to not having themes is that I then can't share templates between projects, but that was an easy problem to just ignore. I already had support for partials so I could easily copy files between projects if I needed to. Brage has already been super useful for the past two years, so I had no desire to add any sort of complexity for a feature I'd probably not use.</p>
+<h2>The Implementation</h2>
+<p>When I started working on version 2.0 I <em>almost</em> made the mistake that a lot of developers make: I almost started from scratch.</p>
+<p>I was really close, too. I had created a <code>v2</code> branch in the project's repository and had removed everything other than the <code>README</code>, <code>LICENSE</code>, and <code>main.go</code> files. Then I though I didn't want to redo a bunch of the grunt work so I copied over some utility files from the <code>main</code> branch... followed by a bunch more files... and then some more, before I finally stopped and realised that I was being an actual idiot.</p>
+<p>This may be my personal project with a target demographic of one, but am I not a professional programming person? Haven't I been doing this for like two decades? There is an inexplicable pleasure associated with starting fresh new projects, but I have, like many of my peers, a trail of abandoned half-finished code bases behind me. Ones that once had me enraptured for weeks but were eventually left to languish as my fickle attention was turned elsewhere. I realised that throwing it all out and starting with a blank slate was a recipe for not getting it done.</p>
+<p>So I bit the bullet, got all the deleted files back, and waded into my own many-months-old legacy code to make changes. And given that I am writing this after having successfully completed Brage 2.0, I do not regret my decision at all.</p>
+<p>The work went surprisingly fast, probably due to the fact that the code was relatively new and my patterns hadn't had time to change much. I worked in a way that I felt was ambitious but allowed for clear, gradual progress: Brage has an <code>init</code> command which spits out an example site that works as boilerplate, but also can function as documentation for how to structure the site. So I just changed the command to spit out a site in a format that I wanted Brage to eventually support. That way I would have a static target to aim for while I made changes.</p>
+<p>This ended up being a great idea as I was essentially doing Test-Driven Development without writing any tests. The test was just whether the site looked like I expected and didn't have any errors when rendering. Of course as I was modifying the generator to work with the new templates and configurations I was also cleaning up and refactoring as I saw fit. This was my own project after all, so I could do exactly as I pleased.</p>
+<h2>The Result</h2>
+<p><a href="https://github.com/michaelenger/brage">Brage</a> is now in version 2.0 and supports blog posts! It uses Mustache and Markdown templates, and lets you define any kind of extra data using YAML. It comes as a single executable and with it you can easily create sites that sit in a single self-contained repository with no dependencies.</p>
+<p>I didn't get to do all the things I wanted, but I try to follow a philosophy of focusing on getting the first 90% done and leaving the other 90% for later. It's incredibly rewarding to have a project that I can actually use, and if I continuously use it I will get inspired to work on it even more later. That way I can (maybe) avoid adding it to the pile of <del>corpses</del> abandoned projects I've left in my wake.</p>
+<p>As to whether this is the beginning of a decade of continuous writing, or if I will end up publishing one thing every few years and then giving up is yet to be seen. The most important thing is that I had fun building Brage. For myself.</p>
+]]></content:encoded>
       <author>Michael Enger</author>
       <pubDate>Thu, 10 Aug 2023 00:00:00 +0000</pubDate>
     </item>
@@ -71,6 +476,8 @@
       <title>Hello, world!</title>
       <link>https://michaelenger.com/blog/hello-world</link>
       <description>Can you see this?</description>
+      <content:encoded><![CDATA[<p>If you can read this that means it worked!</p>
+]]></content:encoded>
       <author>Michael Enger</author>
       <pubDate>Wed, 09 Aug 2023 00:00:00 +0000</pubDate>
     </item>
