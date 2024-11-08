@@ -79,10 +79,7 @@ Why? Well, I genuinely love point-and-click adventure games. The genre—despite
 
 Thinking pragmatically, this style of game is also one that would be a lot simpler to implement than trying for anything action-oriented. It wouldn't require weeks of tweaking the physics to _feel_ just right, nor will it feel empty without multiplayer, or require complex AI or something like that. Also, I have a story that's been burning a hole in my head and I think the best way to tell it is via a style of interactive fiction I adore. Making it 3D is also partially as a challenge to myself, but also as an homage to classic games like _Still Life_ and _Grim Fandango_.
 
-<figure>
-<img src="/assets/blog/gameengine-stillife.jpg" alt="Screenshot from the game Still Life featuring the protagonist visiting a morgue where a tattooed woman is laying on the slab while the physician is inspecting some medical device.">
-<figcaption>It may just be nostalgia, but to me there is something so evocative about the elaborate pre-rendered backgrounds from this era of gaming.</figcaption>
-</figure>
+![Screenshot from the game Still Life featuring the protagonist visiting a morgue where a tattooed woman is laying on the slab while the physician is inspecting some medical device.](/assets/blog/gameengine-stillife.jpg)
 
 Unlike those classics I will forego the static pre-rendered background and go full 3D. Computers are nowadays by far powerful enough to render the necessarily complex scenes you'd need for an adventure game.
 
@@ -120,10 +117,7 @@ I've spent more weeks than I'd like to admit getting this done (I started this i
 
 I was attracted to raylib due to its popularity within the handmade games space and because I wanted to stretch my C++ muscles, fearing that they've atrophied since I last changed jobs. It also claims to provide the means to "enjoy videogames programming", which is exactly the experience I am after. With raylib being as simple as it was, I skipped over my usual process of learning by completing tutorials and just started working on the game demo, referring to the documentation and [plethora of examples](https://www.raylib.com/examples.html) as I went along.
 
-<figure>
-<img src="/assets/blog/gameengine-raylib.png" alt="Screenshot of the finished demo built in raylib. Behind the game demo there is the main Sublime Text window showing some C++ code.">
-<figcaption>raylib had a bit of trouble with the character model I was using, but that wasn't necessarily raylib's fault. It still correctly loaded the mesh, materials, and animations from a random GLB file I found on itch.io.</figcaption>
-</figure>
+![Screenshot of the finished demo built in raylib. Behind the game demo there is the main Sublime Text window showing some C++ code.](/assets/blog/gameengine-raylib.png)
 
 Working with raylib definitely lived up to its tagline and I understood why it has such a positive reputation. The library **is** simple and easy-to-use and I **did** enjoy the programming experience. The API—detailed in the extensive [cheatsheet](https://www.raylib.com/cheatsheet/cheatsheet.html)—feels like a comprehensive toolkit, giving you just what you need to get going and build games. You create a window using `InitWindow`, load models with `LoadModel`, and play sounds with `PlaySound`. If you have a basic understanding of games development, raylib is incredibly easy to work with and doesn't require you to get used to a complex architecture or indecipherable abstractions. I was responsible for structuring my code myself, something I did with great gusto, and raylib was just there to help me do the complex things that didn't pertain to my specific project.
 
@@ -144,10 +138,7 @@ I have some experience with Unity—not to mention having spent many an evening 
 
 In the end I was able to complete the rough game within a single day, much quicker than the two dozen or so hours I spent with raylib. However, I recognise that it isn't a fair point of comparison because the time I spent with raylib also included learning how to use it, whereas with Godot I learned the engine first before I started working on the actual game. And by virtue of using raylib first I solved several gameplay problems with it which I then copied over to the Godot implementation, saving precious time spent on experimentation.
 
-<figure>
-<img src="/assets/blog/gameengine-godot.png" alt="A screenshot of the finished game demo inside the Godot 4 editor interface.">
-<figcaption>I used the same environment and character model for both the raylib and Godot demos. The reason it looks so much better here is because Godot was able to extract out the embedded lighting information from the environment file.</figcaption>
-</figure>
+![A screenshot of the finished game demo inside the Godot 4 editor interface.](/assets/blog/gameengine-godot.png)
 
 One aspect of Godot which initially intimidated me was how it's built on a hierarchical tree of nodes, all which come in different flavours with different uses and requirements. This requires a completely different approach than dealing with Unity's game objects and components, which I at first felt was a lot more intuitive. However, once I understood the node structure and how some nodes interacted with their child nodes I didn't really have any trouble working with it. The architecture has definitely grown on me and I now feel that seeing a tree of nodes makes it easier to quickly grasp how things are structured than having to scan a long list of complex components. I also noticed that I was spending more of my time in Godot writing code than tweaking component parameters in the UI like I would with Unity, which is a definite improvement.
 
